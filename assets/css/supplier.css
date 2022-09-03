@@ -1,0 +1,12 @@
+.card-header {
+	padding: 0.5em 0 1em;
+}
+
+.card-header .button-menu {
+	margin-top: -5px;
+}
+
+.card .description {
+	padding: 1em 0;
+	line-height: 1.5;
+}

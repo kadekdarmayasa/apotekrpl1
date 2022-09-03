@@ -1,0 +1,249 @@
+.sidebar-content {
+	padding: 2.5em;
+	position: relative;
+}
+
+.sidebar-content h2 {
+	font-weight: 600;
+}
+
+.search-bar {
+	display: flex;
+	align-items: center;
+	background-color: white;
+	height: 50px;
+	padding: 5px 10px;
+	max-width: 400px;
+	border-radius: 6px;
+	margin-top: 10px;
+}
+
+.search-bar i {
+	color: grey;
+	font-size: 1rem;
+	margin-right: 8px;
+}
+
+.search-bar input {
+	padding: 5px;
+	border: none;
+	outline: none;
+	font-family: 'Quicksand', sans-serif;
+	font-size: 1rem;
+	color: grey;
+	width: 100%;
+}
+
+.cards {
+	margin-top: 30px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 20px;
+	align-items: start;
+}
+
+.card {
+	background-color: white;
+	min-height: 150px;
+	padding: 1em;
+	border-radius: 10px;
+	cursor: pointer;
+	position: relative;
+	transition: 0.3s ease-in-out;
+}
+
+.actions {
+	background-color: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(2px);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+	flex-direction: column;
+	position: absolute;
+	top: 12px;
+	right: 60px;
+	padding: 0.8em 2em;
+	display: none;
+	opacity: 0;
+}
+
+.actions a {
+	text-decoration: none;
+	margin-top: 10px;
+	color: black;
+}
+
+.actions a:hover {
+	color: blue;
+}
+
+.actions a i {
+	margin-right: 10px;
+}
+
+.card-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.button-menu {
+	display: flex;
+	justify-content: center;
+	background-color: #f9f9f9;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.card-header .action-button {
+	position: absolute;
+	opacity: 0;
+}
+
+.card:hover {
+	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.03);
+}
+
+.card .nama-obat {
+	font-weight: 600;
+	color: #1c1c1c;
+	font-size: 1.2rem;
+}
+
+.card .kategori-obat {
+	color: #808080;
+	font-weight: 400;
+	margin-bottom: 0.5em;
+}
+
+.card .keterangan {
+	line-height: 1.8;
+	color: #1c1c1c;
+}
+
+.price-stok {
+	display: flex;
+	gap: 10px;
+	justify-content: space-around;
+}
+
+.hargajual,
+.stok-obat {
+	flex: 1;
+	border-radius: 5px;
+	margin-top: 2em;
+}
+
+.hargajual h5,
+.stok-obat h5 {
+	font-weight: 500;
+	font-size: 1rem;
+	margin-bottom: 3px;
+	color: rgb(103, 148, 255);
+}
+
+.keterangan-obat-detail {
+	color: grey;
+}
+
+.detail-price-stok {
+	display: flex;
+	justify-content: center;
+}
+
+.detail-price-stok > * {
+	margin: 1em;
+}
+
+.detail-price-stok .hargajual-detail p:first-child,
+.detail-price-stok .hargabeli-detail p:first-child,
+.detail-price-stok .stokobat-detail p:first-child {
+	margin-bottom: 5px;
+	color: rgb(103, 148, 255);
+}
+
+#add-button {
+	position: fixed;
+	bottom: 20px;
+	right: 10px;
+	border: none;
+	background-color: #3daeff;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	color: white;
+	cursor: pointer;
+	transition: 0.3s linear;
+}
+
+#add-button:hover {
+	background-color: #128de4;
+	transform: translateY(-1px);
+	box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+.item-input-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.item-input-container .title {
+	font-weight: 500;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+.input-item {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	margin-top: 1.2em;
+}
+
+.input-item input,
+.input-item select,
+.input-item textarea {
+	border: none;
+	margin-top: 10px;
+	color: grey;
+	font-size: 0.9rem;
+	border: 1px solid rgb(234, 250, 255);
+	border-radius: 8px;
+	padding: 10px;
+	outline: none;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.input-item input {
+	height: 40px;
+}
+
+.input-item select {
+	height: 50px;
+}
+
+.input-item textarea {
+	resize: none;
+	height: 200px;
+}
+
+.input-item input:focus,
+.input-item textarea:focus,
+.input-item select:focus {
+	border: 3px solid rgb(234, 250, 255);
+}
+
+.item-input-container .submit-button {
+	border: none;
+	background-color: rgb(114, 159, 255);
+	color: white;
+	font-family: 'Quicksand', sans-serif;
+	padding: 0.6em;
+	font-size: 1rem;
+	border-radius: 6px;
+	margin-top: 30px;
+	cursor: pointer;
+}
+
+.item-input-container .submit-button:hover {
+	background-color: rgb(102, 151, 255);
+}
