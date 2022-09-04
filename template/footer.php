@@ -15,6 +15,7 @@ $view = $_SESSION['view'];
 <?php elseif ($view == 'supplier') : ?>
   <script src="../assets/js/dropdown.js"></script>
   <script src="../assets/js/action-buttons.js"></script>
+  <script src="../assets/js/supplier.js"></script>
 <?php endif; ?>
 </body>
 

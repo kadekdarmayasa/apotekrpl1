@@ -14,7 +14,7 @@
      <p><?= $leveluser; ?></p>
    </div>
    <div class="profile">
-     <img src="https://api.multiavatar.com/<?= strtolower($username); ?>.svg" alt="avatars">
+     <img src="https://api.multiavatar.com/<?= $idkaryawan; ?>.svg" alt="avatars">
    </div>
    <!-- Akhir Navbar Menu -->
 

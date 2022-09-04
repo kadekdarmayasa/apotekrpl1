@@ -98,7 +98,7 @@ $_SESSION['view'] = 'pelanggan';
                     <i class=" fa-solid fa-pen-to-square"></i>
                     Update
                   </a>
-                  <a href="" class="foto-resep" data-fotoresep="<?= $row['buktifotoresep'] ?>">
+                  <a class="foto-resep" data-fotoresep="<?= $row['buktifotoresep'] ?>">
                     <i class="fa-solid fa-image"></i>
                     Foto Resep
                   </a>

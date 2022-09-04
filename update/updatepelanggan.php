@@ -54,4 +54,7 @@ include '../template/header.php';
     <?php endwhile; ?>
   </form>
 </div>
+
 </body>
+
+</html>

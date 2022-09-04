@@ -91,3 +91,34 @@ if ($_POST['update'] == 'pelanggan') {
     ";
   }
 }
+
+if ($_POST['update'] == 'supplier') {
+  $idsupplier = $_POST['idsupplier'];
+  $perusahaan = $_POST['perusahaan'];
+  $keterangan = $_POST['keterangan'];
+
+  update("UPDATE tb_supplier SET perusahaan='$perusahaan', keterangan='$keterangan' WHERE idsupplier='$idsupplier'");
+
+  if (mysqli_affected_rows($conn) > 0) {
+    echo "
+      <script>
+        alert('Data Supplier Berhasil Diperbarui');
+        location.href = '../view/viewsupplier.php';
+      </script>
+    ";
+  } elseif ($result < 0) {
+    echo "
+      <script>
+        alert('Data Supplier Gagal Diperbarui');
+        location.href = '../view/viewsupplier.php';
+      </script>
+    ";
+  } else {
+    echo "
+      <script>
+        alert('Tidak Terdapat Data Supplier Yang Diperbarui');
+        location.href = '../view/viewsupplier.php';
+      </script>
+    ";
+  }
+}
