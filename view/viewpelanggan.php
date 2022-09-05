@@ -84,7 +84,7 @@ $_SESSION['view'] = 'pelanggan';
             <div class="card">
               <div class="card-header">
                 <div class="title">
-                  <h3 class="nama-pelanggan"><?= $row['namalengkap']; ?></h3>
+                  <h3 class="nama"><?= $row['namalengkap']; ?></h3>
                 </div>
                 <div class="button-menu">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -115,7 +115,7 @@ $_SESSION['view'] = 'pelanggan';
                     <p>Usia</p>
                     <h4><?= $row['usia']; ?></h4>
                   </div>
-                  <div class="id-customer">
+                  <div class="id-user">
                     <p>Id</p>
                     <h4><?= $row['idpelanggan']; ?></h4>
                   </div>

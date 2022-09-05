@@ -28,6 +28,11 @@ $view = $_SESSION['view'];
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/view.css">
     <link rel="stylesheet" href="../assets/css/supplier.css">
+  <?php elseif ($view == 'karyawan') : ?>
+    <title>Karyawan - Apotek Media Utama</title>
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/view.css">
+    <link rel="stylesheet" href="../assets/css/pelanggan.css">
   <?php else : ?>
     <title>Obat - Apotek Media Utama</title>
     <link rel="stylesheet" href="../assets/css/index.css">

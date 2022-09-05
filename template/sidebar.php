@@ -82,10 +82,17 @@ $view =  $_SESSION['view'];
     <?php endif; ?>
 
     <li class="menu">
-      <a href="">
-        <i class="fa-solid fa-user-doctor"></i>
-        Karyawan
-      </a>
+      <?php if ($view == 'karyawan') : ?>
+        <a href="viewkaryawan.php" class="active">
+          <i class="fa-solid fa-user-doctor"></i>
+          Karyawan
+        </a>
+      <?php else : ?>
+        <a href="viewkaryawan.php">
+          <i class="fa-solid fa-user-doctor"></i>
+          Karyawan
+        </a>
+      <?php endif; ?>
     </li>
   </ul>
   <!-- Akhir Sidebar Menu -->

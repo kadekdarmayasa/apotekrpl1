@@ -51,6 +51,10 @@ body {
 
 .sidebar .brand-name h1 {
 	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.sidebar .brand-name p {
 	font-weight: 500;
 }
 
@@ -81,6 +85,7 @@ body {
 	text-decoration: none;
 	color: #484848;
 	font-size: 1.1rem;
+	font-weight: 400;
 }
 
 .middle-menu a.active,
@@ -137,7 +142,7 @@ nav .arrow-down:hover {
 
 .dropdown p {
 	color: #1c1c1c;
-	font-weight: 300;
+	font-weight: 400;
 }
 .dropdown hr {
 	background-color: #c6c6c6;
@@ -174,12 +179,12 @@ nav .arrow-down:hover {
 
 .name-role h3 {
 	font-size: 1rem;
-	font-weight: 400;
+	font-weight: 500;
 }
 
 .name-role p {
 	font-size: 0.9rem;
-	font-weight: 300;
+	font-weight: 400;
 }
 
 .profile {
