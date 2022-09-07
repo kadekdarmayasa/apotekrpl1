@@ -1,12 +1,6 @@
 <?php
 include 'koneksi.php';
 
-function getUser($query)
-{
-  global $conn;
-  return mysqli_fetch_assoc(mysqli_query($conn, $query));
-}
-
 function getUserDetails($query, $user)
 {
   global $conn;
@@ -26,14 +20,24 @@ function getNumRows($query)
 
 function setLevelUser($leveluser)
 {
-  switch ($leveluser) {
-    case 'user_admin':
-      return 'admin';
-      break;
-    case 'user_karyawan':
-      return 'karyawan';
-      break;
-  }
+  return $leveluser == 'user_admin' ?  'admin' :  'karyawan';
+}
+
+function getLevelUser($leveluser)
+{
+  return setLevelUser($leveluser);
+}
+
+function select($query)
+{
+  global $conn;
+  return mysqli_query($conn, $query);
+}
+
+function selectSingleData($query)
+{
+  global $conn;
+  return mysqli_fetch_assoc(mysqli_query($conn, $query));
 }
 
 function delete($query)

@@ -26,18 +26,33 @@ $rows = mysqli_num_rows($hasil);
 
 <body>
   <?php
+  $row = mysqli_fetch_assoc($hasil);
   if ($rows) :
-    $_SESSION['username'] = $username;
-    $_SESSION['idkaryawan'] = mysqli_fetch_assoc($hasil)['idkaryawan'];
-    header('Location: index.php');
-    exit;
+    $userInfo = [
+      "idkaryawan" => $row['idkaryawan'],
+      "username" => $username,
+      "leveluser" => $row['leveluser']
+    ];
+    $_SESSION['userinfo'] = $userInfo;
+    $namakaryawan = mysqli_fetch_assoc(mysqli_query($conn, "SELECT namakaryawan FROM tb_karyawan WHERE idkaryawan=" . $userInfo['idkaryawan']))['namakaryawan'];
   ?>
+    <script>
+      Swal.fire({
+        title: "Selamat Datang " + "<?= $namakaryawan ?>",
+        width: '30em',
+        icon: 'success',
+        showConfirmButton: false
+      }).then(() => {
+        location.href = 'index.php';
+      });
+    </script>
   <?php else : ?>
     <script>
       Swal.fire({
-        text: "username atau password salah",
+        title: "username atau password salah",
         width: '30em',
-        icon: 'warning',
+        icon: 'error',
+        showConfirmButton: false
       }).then(() => {
         location.href = 'login.php';
       });

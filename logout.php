@@ -1,30 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php $_SESSION['view'] = 'logout'; ?>
+<?php include 'template/header.php' ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Logout</title>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.29/dist/sweetalert2.all.min.js"></script>
-  <link rel="stylesheet" href="assets/css/index.css">
-</head>
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: 'Anda Berhasil Logout',
+    html: 'Sedang diproses...',
+    timer: 5000,
+    timerProgressBar: true,
+    showConfirmButton: false
+  }).then((result) => {
+    if (result.dismiss === Swal.DismissReason.timer) {
+      location.href = 'login.php';
+    }
+    location.href = 'login.php';
+  })
+</script>
 
-<body>
-  <?php
-  session_start();
-  session_destroy();
-  ?>
+<?php include 'template/footer.php' ?>
 
-  <script>
-    Swal.fire({
-      text: "Anda Berhasil Logout",
-      width: '30em',
-      icon: 'success',
-    }).then(() => {
-      location.href = 'index.php';
-    });
-  </script>
-</body>
-
-</html>
+<?php
+session_start();
+session_destroy();
+?>

@@ -1,16 +1,17 @@
 <?php
-include '../app/koneksi.php';
+include '../app/functions.php';
 
-$idobat = $_GET['idobat'];
-$query = mysqli_query($conn, "SELECT * FROM tb_obat WHERE idobat=" . $idobat);
+$query = mysqli_query($conn, "SELECT * FROM tb_obat WHERE idobat=" .  $_GET['idobat']);
 
 ?>
 
+
 <?php
-session_start();
 $_SESSION['view'] = 'updateform';
 include '../template/header.php';
 ?>
+
+
 <div class="container">
   <div class="banner">
     <i class="fa-solid fa-briefcase-medical"></i>
@@ -21,7 +22,7 @@ include '../template/header.php';
       <h2>Perbarui Data Obat</h2>
     </div>
     <?php while ($row = mysqli_fetch_assoc($query)) : ?>
-      <input type="hidden" name="idobat" value="<?= $idobat ?>">
+      <input type="hidden" name="idobat" value="<?= $_GET['idobat'] ?>">
       <input type="hidden" name="update" value="obat">
       <div class="form-input">
         <select name="idsupplier" id="idsupplier">
@@ -66,13 +67,13 @@ include '../template/header.php';
         <textarea name="keterangan" id="keterangan" required><?= $row['keterangan']; ?></textarea>
       </div>
       <div class="form-buttons">
-        <button type="submit" name="udpate-button">Perbarui</button>
+        <button type="submit" name="update-button">Perbarui</button>
         <?php $_SESSION['view'] = 'viewobat'; ?>
         <a href="../view/viewobat.php">Kembali</a>
       </div>
     <?php endwhile; ?>
   </form>
 </div>
-</body>
 
-</html>
+
+<?php include '../template/footer.php' ?>

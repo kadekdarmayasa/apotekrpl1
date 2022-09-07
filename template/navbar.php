@@ -1,10 +1,10 @@
  <?php
-  $username = $_SESSION['username'];
-  $idkaryawan = $_SESSION['idkaryawan'];
-  $user = getUser("SELECT * FROM tb_login WHERE idkaryawan=$idkaryawan");
-  $query = mysqli_query($conn, "SELECT * FROM tb_karyawan INNER JOIN tb_login USING(idkaryawan)");
+  $username = $_SESSION['userinfo']['username'];
+  $idkaryawan = $_SESSION['userinfo']['idkaryawan'];
+  $user = selectSingleData("SELECT * FROM tb_login WHERE idkaryawan=$idkaryawan");
+  $query = select("SELECT * FROM tb_karyawan INNER JOIN tb_login USING(idkaryawan)");
   $userDetail = getUserDetails($query, $user);
-  $leveluser = setLevelUser($user['leveluser']);
+  $leveluser = getLevelUser($user['leveluser']);
   ?>
  <!-- Awal Nav -->
  <nav>

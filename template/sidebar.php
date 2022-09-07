@@ -30,7 +30,7 @@ $view =  $_SESSION['view'];
     </li>
 
     <li class="menu">
-      <?php if ($view == 'viewobat') : ?>
+      <?php if ($view == 'obat') : ?>
         <a href="viewobat.php" class="active">
           <i class="fa-solid fa-pills"></i>
           Obat

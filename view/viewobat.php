@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
 }
 
 include '../app/koneksi.php';
 include '../app/functions.php';
-$_SESSION['view'] = 'viewobat';
+$_SESSION['view'] = 'obat';
 
 // Delete Statement
 if (isset($_GET['idobat'])) {

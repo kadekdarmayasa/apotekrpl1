@@ -1,39 +1,67 @@
-<!doctype html>
-<html lang="en">
+<?php
+session_start();
+$_SESSION['view'] = 'login';
+?>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://kit.fontawesome.com/a53653dcab.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./assets/css/login.css">
-  <title>Login - Apotek Media Utama</title>
-</head>
+<?php include 'template/header.php' ?>
 
-<body>
-  <div class="container">
-    <div class="banner">
-      <i class="fa-solid fa-briefcase-medical"></i>
-      <h1>Apotek Media Utama</h1>
-      <p>Selalu memberikan pelayanan yang terbaik kepada pelanggan</p>
-    </div>
-    <form action="proses_login.php" method="post">
+<form action="proses_login.php" method="post">
+  <div class="form">
+    <div class="form-toggle"></div>
+    <div class="form-panel one">
       <div class="form-header">
-        <h2>Login</h2>
-        <p>Belum punya akun? <a href="">Daftar</a></p>
+        <h1>Account Login</h1>
       </div>
-      <div class="form-input">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" autofocus>
+      <div class="form-content">
+        <form>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="form-group">
+            <label class="form-remember">
+              <input type="checkbox" />Remember Me
+            </label><a class="form-recovery" href="#">Forgot Password?</a>
+          </div>
+          <div class="form-group">
+            <button type="submit">Log In</button>
+          </div>
+        </form>
       </div>
-      <div class="form-input">
-        <label for="username">Password</label>
-        <input type="password" name="password" id="password">
+    </div>
+    <div class="form-panel two">
+      <div class="form-header">
+        <h1>Register Account</h1>
       </div>
-      <div class="form-input">
-        <button type="submit">Login</button>
+      <div class="form-content">
+        <form>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="form-group">
+            <label for="cpassword">Confirm Password</label>
+            <input type="password" id="cpassword" name="cpassword" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <button type="submit">Register</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
-</body>
+</form>
 
-</html>
+<?php include 'template/footer.php' ?>

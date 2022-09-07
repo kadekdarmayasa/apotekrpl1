@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
 }
@@ -9,21 +9,30 @@ include "../app/koneksi.php";
 include '../app/functions.php';
 
 if (isset($_POST['submit-button'])) {
-  $namakaryawan = $_POST['namakaryawan'];
-  $alamat = $_POST['alamat'];
-  $telp = $_POST['telp'];
+  $username = htmlspecialchars($_POST['username']);
+  $password =  htmlspecialchars($_POST['password']);
+  $namakaryawan = htmlspecialchars($_POST['namakaryawan']);
+  $levelUser = htmlspecialchars($_POST['leveluser']);
+  $telp = htmlspecialchars($_POST['telp']);
+  $alamat = htmlspecialchars($_POST['alamat']);
 
-  if ($filename) {
-    $affectedRow = insert("INSERT INTO tb_karyawan
-    (idkaryawan, namakaryawan, alamat, telp) 
-    VALUES 
-    (null, '$namakaryawan', '$alamat', $telp)
-  ");
+  if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tb_login WHERE username = '$username'")) > 0) {
+    $isExist = true;
+  } else {
+    // Insert ke dalam tabel karyawan
+    $queryKaryawan = insert("INSERT INTO tb_karyawan(idkaryawan, namakaryawan, alamat, telp) VALUES (null, '$namakaryawan', '$alamat', $telp)");
 
-    if ($affectedRow > 0) {
-      $successfullyAdded = true;
-    } else {
-      $successfullyAdded = false;
+    // Jika karyawan berhasil ditambahkan 
+    if ($queryKaryawan > 0) {
+      // Ambil idkaryawan dari data terakhir 
+      $idkaryawan = mysqli_fetch_assoc(mysqli_query($conn, "SELECT idkaryawan FROM tb_karyawan WHERE namakaryawan = '$namakaryawan'"))['idkaryawan'];
+
+      // Insert ke dalam tabel login dengan idkaryawan diatas
+      $queryToLogin = insert("INSERT INTO tb_login(username, password, leveluser, idkaryawan) VALUES ('$username', '$password', '$levelUser', $idkaryawan)");
+
+      if ($queryToLogin) {
+        $successfullyAdded = true;
+      }
     }
   }
 }
@@ -110,9 +119,25 @@ $_SESSION['view'] = 'karyawan';
       <div class="item-input-container">
         <h2 class="title">Tambah Karyawan</h2>
         <div class="input-item">
+          <label for="leveluser">Level User</label>
+          <select name="leveluser" id="leveluser">
+            <option value="user_admin">admin</option>
+            <option value="user_karyawan">karyawan</option>
+          </select>
+        </div>
+        <div class="input-item">
           <label for="namakaryawan">Nama Karyawan</label>
           <input type="text" name="namakaryawan" id="namakaryawan" required>
         </div>
+        <div class="input-item">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" required>
+        </div>
+        <div class="input-item">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+
         <div class="input-item">
           <label for="telp">No Telephone</label>
           <input type="number" name="telp" id="telp" required>
@@ -127,15 +152,13 @@ $_SESSION['view'] = 'karyawan';
   </swal-html>
 </template>
 
-
-<?php if (isset($successfullyAdded)) : ?>
-  <?php if ($successfullyAdded) : ?>
+<?php if (isset($isExist)) : ?>
+  <?php if ($isExist) : ?>
     <script>
       Swal.fire({
-        icon: 'success',
-        title: 'Data karyawan berhasil ditambahkan',
-        toast: true,
-        position: 'top-end',
+        icon: 'error',
+        title: 'Mohon maaf username sudah terdaftar',
+        position: 'center',
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
@@ -147,11 +170,15 @@ $_SESSION['view'] = 'karyawan';
         location.href = 'viewkaryawan.php';
       });
     </script>
-  <?php else : ?>
+  <?php endif; ?>
+<?php endif; ?>
+
+<?php if (isset($successfullyAdded)) : ?>
+  <?php if ($successfullyAdded) : ?>
     <script>
       Swal.fire({
-        icon: 'error',
-        title: 'Data karyawan gagal ditambahkan',
+        icon: 'success',
+        title: 'Data karyawan berhasil ditambahkan',
         toast: true,
         position: 'top-end',
         showConfirmButton: false,

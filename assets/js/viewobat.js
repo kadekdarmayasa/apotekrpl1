@@ -6,14 +6,14 @@ document.getElementById('add-button').addEventListener('click', function () {
 	});
 });
 
-document.querySelectorAll('.detail').forEach(function (item) {
-	item.addEventListener('click', function (event) {
-		let namaObat = this.dataset.namaobat;
-		let keterangan = this.dataset.keterangan;
-		let kategoriObat = this.dataset.kategoriobat;
-		let hargaJual = this.dataset.hargajual;
-		let hargabeli = this.dataset.hargabeli;
-		let stokObat = this.dataset.stokobat;
+window.addEventListener('click', function (event) {
+	if (event.target.classList.contains('detail')) {
+		let namaObat = event.target.dataset.namaobat;
+		let keterangan = event.target.dataset.keterangan;
+		let kategoriObat = event.target.dataset.kategoriobat;
+		let hargaJual = event.target.dataset.hargajual;
+		let hargabeli = event.target.dataset.hargabeli;
+		let stokObat = event.target.dataset.stokobat;
 		Swal.fire({
 			icon: 'info',
 			html: `
@@ -38,10 +38,10 @@ document.querySelectorAll('.detail').forEach(function (item) {
 			showConfirmButton: false,
 			showCloseButton: true,
 		});
-		event.preventDefault();
-		event.stopPropagation();
-	});
+	}
 });
+
+document.querySelectorAll('.detail').forEach(function (item) {});
 
 document.querySelectorAll('.update').forEach(function (item) {
 	item.addEventListener('click', function (event) {});

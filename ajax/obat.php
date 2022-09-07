@@ -36,8 +36,8 @@ if (isset($_GET['key'])) {
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
         <div class="actions">
-          <a href="?idobat=<?= $idobat; ?>">
-            <i class="fa-solid fa-trash-can"></i>
+          <a onclick="confirmation(<?= $idobat; ?>)">
+            <i class=" fa-solid fa-trash-can"></i>
             Delete
           </a>
           <a href="../update/updateobat.php?idobat=<?= $idobat ?>" class="update">

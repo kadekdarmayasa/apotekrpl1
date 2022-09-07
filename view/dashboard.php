@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
 }
@@ -9,8 +9,8 @@ if (!isset($_SESSION['username'])) {
 include "../app/koneksi.php";
 include '../app/functions.php';
 
-$username = $_SESSION['username'];
-$idkaryawan = $_SESSION['idkaryawan'];
+$username = $_SESSION['userinfo']['username'];
+$idkaryawan = $_SESSION['userinfo']['idkaryawan'];
 
 $totalObat = getNumRows("SELECT * FROM tb_obat");
 $totalKaryawan = getNumRows("SELECT * FROM tb_karyawan");
@@ -69,7 +69,7 @@ include '../template/header.php'
           <!-- Akhir Item 1 - Obat  -->
 
           <!-- Awal Item 2 - Karyawan -->
-          <a href="" class="item karyawan">
+          <a href="./viewkaryawan.php" class="item karyawan">
             <div class="picture">
               <i class="fa-solid fa-user-doctor"></i>
             </div>
