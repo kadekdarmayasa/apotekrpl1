@@ -1,5 +1,6 @@
 <?php
 $view =  $_SESSION['view'];
+$leveluser = $_SESSION['userinfo']['leveluser'];
 ?>
 
 <div class="sidebar">
@@ -12,88 +13,145 @@ $view =  $_SESSION['view'];
     </div>
   </div>
   <!-- Akhir Brand -->
-
   <!-- Awal sidebar menu -->
   <ul class="middle-menu">
-    <li class="menu">
-      <?php if ($view == 'dashboard') : ?>
-        <a href="dashboard.php" class="active">
-          <i class="fa-solid fa-gauge"></i>
-          Dashboard
-        </a>
-      <?php else : ?>
-        <a href="dashboard.php">
-          <i class="fa-solid fa-gauge"></i>
-          Dashboard
-        </a>
-      <?php endif; ?>
-    </li>
-
-    <li class="menu">
-      <?php if ($view == 'obat') : ?>
-        <a href="viewobat.php" class="active">
-          <i class="fa-solid fa-pills"></i>
-          Obat
-        </a>
-      <?php else : ?>
-        <a href="viewobat.php">
-          <i class="fa-solid fa-pills"></i>
-          Obat
-        </a>
-      <?php endif; ?>
-    </li>
-
-    <li class="menu">
-      <a href="">
-        <i class="fa-solid fa-money-bill-transfer"></i>
-        Transaksi
-      </a>
-    </li>
-
-    <li class="menu">
-      <?php if ($view == 'pelanggan') : ?>
-        <a href="viewpelanggan.php" class="active">
-          <i class="fa-solid fa-users"></i>
-          Pelanggan
-        </a>
-      <?php else : ?>
-        <a href="viewpelanggan.php">
-          <i class="fa-solid fa-users"></i>
-          Pelanggan
-        </a>
-      <?php endif; ?>
-    </li>
-
-
-    <?php if ($view == 'supplier') : ?>
+    <?php if ($leveluser == 'user_admin') : ?>
+      <!-- Dashboard Awal -->
       <li class="menu">
-        <a href="viewsupplier.php" class="active">
-          <i class="fa-solid fa-truck-field"></i>
-          Supplier
+        <?php if ($view == 'dashboard') : ?>
+          <a href="dashboard.php" class="active">
+            <i class="fa-solid fa-gauge"></i>
+            Dashboard
+          </a>
+        <?php else : ?>
+          <a href="dashboard.php">
+            <i class="fa-solid fa-gauge"></i>
+            Dashboard
+          </a>
+        <?php endif; ?>
+      </li>
+      <!-- Dashboard Akhir -->
+
+      <!-- Obat Awal -->
+      <li class="menu">
+        <?php if ($view == 'obat') : ?>
+          <a href="viewobat.php" class="active">
+            <i class="fa-solid fa-pills"></i>
+            Obat
+          </a>
+        <?php else : ?>
+          <a href="viewobat.php">
+            <i class="fa-solid fa-pills"></i>
+            Obat
+          </a>
+        <?php endif; ?>
+      </li>
+      <!-- Obat Akhir -->
+
+      <!-- Transaksi Awal -->
+      <li class="menu">
+        <a href="">
+          <i class="fa-solid fa-money-bill-transfer"></i>
+          Transaksi
+        </a>
+      </li>
+      <!-- Transaksi Akhir -->
+
+      <!-- Pelanggan Awal -->
+      <li class="menu">
+        <?php if ($view == 'pelanggan') : ?>
+          <a href="viewpelanggan.php" class="active">
+            <i class="fa-solid fa-users"></i>
+            Pelanggan
+          </a>
+        <?php else : ?>
+          <a href="viewpelanggan.php">
+            <i class="fa-solid fa-users"></i>
+            Pelanggan
+          </a>
+        <?php endif; ?>
+      </li>
+      <!-- Pelanggan Akhir -->
+
+      <!-- Awal Supplier -->
+      <li class="menu">
+        <?php if ($view == 'supplier') : ?>
+          <a href="viewsupplier.php" class="active">
+            <i class="fa-solid fa-truck-field"></i>
+            Supplier
+          </a>
+        <?php else : ?>
+          <a href="viewsupplier.php">
+            <i class="fa-solid fa-truck-field"></i>
+            Supplier
+          </a>
+        <?php endif; ?>
+      </li>
+      <!-- Akhir Supplier -->
+
+      <!-- Awal Karyawan -->
+      <li class="menu">
+        <?php if ($view == 'karyawan') : ?>
+          <a href="viewkaryawan.php" class="active">
+            <i class="fa-solid fa-user-doctor"></i>
+            Karyawan
+          </a>
+        <?php else : ?>
+          <a href="viewkaryawan.php">
+            <i class="fa-solid fa-user-doctor"></i>
+            Karyawan
+          </a>
+        <?php endif; ?>
+      </li>
+      <!-- Akhir Karyawan -->
+
+      <li class="menu">
+        <a href="../register.php">
+          Registrasi
         </a>
       </li>
     <?php else : ?>
+      <!-- Dashboard Awal -->
       <li class="menu">
-        <a href="viewsupplier.php">
-          <i class="fa-solid fa-truck-field"></i>
-          Supplier
+        <?php if ($view == 'dashboard') : ?>
+          <a href="dashboard.php" class="active">
+            <i class="fa-solid fa-gauge"></i>
+            Dashboard
+          </a>
+        <?php else : ?>
+          <a href="dashboard.php">
+            <i class="fa-solid fa-gauge"></i>
+            Dashboard
+          </a>
+        <?php endif; ?>
+      </li>
+      <!-- Dashboard Akhir -->
+
+      <!-- Transaksi Awal -->
+      <li class="menu">
+        <a href="">
+          <i class="fa-solid fa-money-bill-transfer"></i>
+          Transaksi
         </a>
       </li>
-    <?php endif; ?>
+      <!-- Transaksi Akhir -->
 
-    <li class="menu">
-      <?php if ($view == 'karyawan') : ?>
-        <a href="viewkaryawan.php" class="active">
-          <i class="fa-solid fa-user-doctor"></i>
-          Karyawan
-        </a>
-      <?php else : ?>
-        <a href="viewkaryawan.php">
-          <i class="fa-solid fa-user-doctor"></i>
-          Karyawan
-        </a>
-      <?php endif; ?>
-    </li>
+      <!-- Pelanggan Awal -->
+      <li class="menu">
+        <?php if ($view == 'pelanggan') : ?>
+          <a href="viewpelanggan.php" class="active">
+            <i class="fa-solid fa-users"></i>
+            Pelanggan
+          </a>
+        <?php else : ?>
+          <a href="viewpelanggan.php">
+            <i class="fa-solid fa-users"></i>
+            Pelanggan
+          </a>
+        <?php endif; ?>
+      </li>
+      <!-- Pelanggan Akhir -->
+    <?php endif; ?>
   </ul>
   <!-- Akhir Sidebar Menu -->
 </div>

@@ -4,6 +4,15 @@ session_start();
 if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
+} else {
+  if ($_SESSION['userinfo']['leveluser'] != 'user_admin') {
+    echo "
+      <script>
+        alert('Anda adalah karyawan');
+        location.href = '../index.php';
+      </script>
+    ";
+  }
 }
 
 include '../app/koneksi.php';
@@ -214,7 +223,7 @@ if (isset($_POST['search-keyword'])) {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 2000,
+        timer: 10000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)

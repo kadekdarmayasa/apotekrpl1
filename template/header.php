@@ -17,13 +17,18 @@ $view = $_SESSION['view'];
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.29/dist/sweetalert2.all.min.js"></script>
 
 
-  <!-- Title and CSS for view dashboard -->
-  <?php if ($view == 'dashboard') : ?>
-    <title>Dashboard - Apotek Media Utama</title>
-    <link rel="stylesheet" href="../assets/css/index.css">
+  <!-- Title and CSS for view dashboard and proses login -->
+  <?php if ($view == 'dashboard' || $view == 'proses_login') : ?>
+    <?php if ($view == 'proses_login') : ?>
+      <link rel="stylesheet" href="assets/css/index.css">
+      <title>Proses Login</title>
+    <?php else : ?>
+      <link rel="stylesheet" href="../assets/css/index.css">
+      <title>Dashboard - Apotek Media Utama</title>
+    <?php endif ?>
 
     <!-- Title and CSS for view proses_update and view logout -->
-  <?php elseif ($view == 'proses_update' || $view == 'logout') : ?>
+  <?php elseif ($view == 'proses_update' || $view == 'logout' || $view == 'proses_register') : ?>
     <title>Processing...</title>
     <?php if ($view == 'proses_update') : ?>
       <link rel="stylesheet" href="../assets/css/index.css">
@@ -32,8 +37,13 @@ $view = $_SESSION['view'];
     <?php endif; ?>
 
     <!-- Title and CSS for view login  -->
-  <?php elseif ($view == 'login') : ?>
-    <title>Login - Apotek Media Utama</title>
+  <?php elseif ($view == 'login' || $view == 'register') : ?>
+    <?php if ($view == 'login') : ?>
+      <title>Login - Apotek Media Utama</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+      <link rel="stylesheet" href="assets/css/login.css">
+    <?php endif; ?>
+    <title>Register - Apotek Media Utama</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="assets/css/login.css">
 

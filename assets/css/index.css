@@ -63,10 +63,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 0.8rem 1.5rem;
-}
-
-.middle-menu {
+	padding: 0rem 1.5rem;
 	margin-top: 2.5rem;
 	position: sticky;
 	top: 150px;
@@ -86,6 +83,25 @@ body {
 	color: #484848;
 	font-size: 1rem;
 	font-weight: 500;
+}
+
+.middle-menu .menu:last-child a {
+	width: 100%;
+	display: block;
+	color: black;
+	padding: 0.8em 1em;
+	text-align: center;
+	font-weight: 600;
+	margin-top: 2em;
+	border-radius: 5px;
+	font-size: 0.9rem;
+	border: 1px solid rgb(27, 114, 255);
+	color: rgb(27, 114, 255);
+}
+
+.middle-menu .menu:last-child:hover a {
+	background-color: rgb(27, 114, 255);
+	color: white;
 }
 
 .middle-menu a.active,
@@ -212,7 +228,7 @@ main .jumbotron {
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: 60%;
+	height: 180px;
 }
 
 .dashboard {

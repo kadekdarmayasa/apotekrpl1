@@ -16,10 +16,15 @@ html {
 
 body {
 	font-family: 'Quicksand', sans-serif;
-	background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+	background-image: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	min-height: 100vh;
 	color: rgba(0, 0, 0, 0.6);
 	font-size: 14px;
 	line-height: 1.6em;
+	padding-bottom: 10em;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -105,7 +110,9 @@ body {
 .two .form-group label {
 	color: #ffffff;
 }
-.form-group input {
+.form-group input,
+.form-group select,
+.form-group textarea {
 	outline: none;
 	display: block;
 	background: rgba(0, 0, 0, 0.1);
@@ -121,7 +128,14 @@ body {
 	line-height: inherit;
 	transition: 0.3s ease;
 }
-.form-group input:focus {
+
+.form-group textarea {
+	resize: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
 	color: rgba(0, 0, 0, 0.8);
 }
 .two .form-group input {

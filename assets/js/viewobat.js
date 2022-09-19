@@ -41,8 +41,6 @@ window.addEventListener('click', function (event) {
 	}
 });
 
-document.querySelectorAll('.detail').forEach(function (item) {});
-
 document.querySelectorAll('.update').forEach(function (item) {
 	item.addEventListener('click', function (event) {});
 });

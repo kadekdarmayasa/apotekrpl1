@@ -36,6 +36,7 @@ $view = $_SESSION['view'];
   <script src="../assets/js/action-buttons.js"></script>
   <script src="../assets/js/karyawan.js"></script>
 <?php endif; ?>
+
 </body>
 
 </html>

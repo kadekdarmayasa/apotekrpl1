@@ -3,6 +3,15 @@ session_start();
 if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
+} else {
+  if ($_SESSION['userinfo']['leveluser'] != 'user_admin') {
+    echo "
+      <script>
+        alert('Anda adalah karyawan');
+        location.href = '../index.php';
+      </script>
+    ";
+  }
 }
 
 include "../app/koneksi.php";

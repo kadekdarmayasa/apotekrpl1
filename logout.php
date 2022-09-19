@@ -6,9 +6,12 @@
     icon: 'success',
     title: 'Anda Berhasil Logout',
     html: 'Sedang diproses...',
-    timer: 5000,
+    timer: 3000,
     timerProgressBar: true,
-    showConfirmButton: false
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
   }).then((result) => {
     if (result.dismiss === Swal.DismissReason.timer) {
       location.href = 'login.php';

@@ -23,11 +23,14 @@ if ($_POST['update'] == 'obat') :
     <script>
       Swal.fire({
         icon: 'success',
-        title: 'Data Obat Berhasil Di Tambahkan',
+        title: 'Data Obat Berhasil Diperbarui',
         html: 'Anda akan diarahkan ke dalam viewobat...',
-        timer: 5000,
+        timer: 10000,
         timerProgressBar: true,
-        showConfirmButton: false
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
       }).then((result) => {
         if (result.dismiss === Swal.DismissReason.timer) {
           location.href = '../view/viewobat.php';
@@ -41,7 +44,7 @@ if ($_POST['update'] == 'obat') :
         icon: 'success',
         title: 'Tidak Terdapat Data yang Diperbarui',
         html: 'Anda akan diarahkan ke dalam viewobat...',
-        timer: 5000,
+        timer: 10000,
         timerProgressBar: true,
         didOpen: () => {
           Swal.showLoading();

@@ -6,7 +6,6 @@
   $userDetail = getUserDetails($query, $user);
   $leveluser = getLevelUser($user['leveluser']);
   ?>
- <!-- Awal Nav -->
  <nav>
    <!-- Awal Navbar Menu -->
    <div class="name-role">
@@ -37,4 +36,3 @@
    </div>
    <!-- Akhir Dropdown Menu -->
  </nav>
- <!-- Akhir Nav -->
