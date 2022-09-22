@@ -9,19 +9,14 @@ if ($_SESSION['view'] != 'register') {
 $_SESSION['view'] = 'proses_register';
 $leveluser = $_POST['leveluser'];
 $usernameRegis = $_POST['username'];
+$idkaryawan = $_POST['idkaryawan'];
 $passwordRegis = password_hash($_POST['password'], PASSWORD_DEFAULT);
-$namakaryawan = $_POST['name'];
-$noTelp = $_POST['telp'];
-$alamat = $_POST['address'];
 
 $matchingValues = select("SELECT * FROM tb_login WHERE username='$usernameRegis'");
 if (mysqli_num_rows($matchingValues)) {
   $existUsername = true;
 } else {
-  $insert_to_karyawan = insert("INSERT INTO tb_karyawan(idkaryawan, namakaryawan, alamat, telp) VALUES (null, '$namakaryawan', '$alamat', $noTelp)");
-  $last_id = mysqli_insert_id($conn);
-
-  $query_to_login = insert("INSERT INTO tb_login(username, password, leveluser, idkaryawan) VALUES('$usernameRegis', '$passwordRegis', '$leveluser', $last_id)");
+  insert("INSERT INTO tb_login(username, password, leveluser, idkaryawan) VALUES('$usernameRegis', '$passwordRegis', '$leveluser', '$idkaryawan')");
   $successRegis = true;
 }
 
@@ -54,7 +49,7 @@ if (mysqli_num_rows($matchingValues)) {
   <script>
     Swal.fire({
       icon: 'success',
-      title: 'Karyawan Berhasil Ditambahkan',
+      title: 'Karyawan Berhasil Difaftarkan',
       text: 'Anda akan diarahkan ke dashboard...',
       showConfirmButton: false,
       timer: 3000,

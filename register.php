@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'app/functions.php';
 if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: login.php');
   exit;
@@ -20,10 +21,14 @@ $_SESSION['view'] = 'register';
       <div class="form-content">
         <form>
           <div class="form-group">
-            <label for="leveluser">Level User</label>
-            <select name="leveluser" id="leveluser">
-              <option value="user_admin">User Admin</option>
-              <option value="user_karyawan">User Karyawan</option>
+            <label for="idkaryawan">Nama Karyawan</label>
+            <select name="idkaryawan" id="idkaryawan">
+              <?php
+              $hasilKaryawan = select("SELECT * FROM tb_karyawan WHERE idkaryawan NOT IN (SELECT idkaryawan FROM tb_login)");
+              while ($row = mysqli_fetch_assoc($hasilKaryawan)) :
+              ?>
+                <option value="<?= $row['idkaryawan'] ?>"><?= $row['namakaryawan']; ?></option>
+              <?php endwhile; ?>
             </select>
           </div>
           <div class="form-group">
@@ -35,16 +40,11 @@ $_SESSION['view'] = 'register';
             <input type="password" id="password" name="password" required />
           </div>
           <div class="form-group">
-            <label for="name">Nama Karyawan</label>
-            <input type="name" id="name" name="name" required />
-          </div>
-          <div class="form-group">
-            <label for="telp">No Telepon</label>
-            <input type="number" id="telp" name="telp" required />
-          </div>
-          <div class="form-group">
-            <label for="address">Alamat</label>
-            <textarea id="address" name="address" rows="10" cols="10" required></textarea>
+            <label for="leveluser">Level User</label>
+            <select name="leveluser" id="leveluser">
+              <option value="user_admin">User Admin</option>
+              <option value="user_karyawan">User Karyawan</option>
+            </select>
           </div>
           <div class="form-group">
             <button type="submit">Register</button>

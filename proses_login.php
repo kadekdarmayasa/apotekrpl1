@@ -17,7 +17,7 @@ $_SESSION['view'] = 'proses_login';
 
 <?php
 if (password_verify($_POST['password'], $hash_pass)) :
-  $hasil = select("SELECT * FROM tb_login where username='$login_username'");
+  $hasil = select("SELECT * FROM tb_login WHERE username='$login_username'");
   $row = mysqli_fetch_assoc($hasil);
 
   $userInfo = [
