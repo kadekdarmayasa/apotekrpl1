@@ -95,8 +95,8 @@ if (isset($_POST['search-keyword'])) {
             $nama_obat = $row['namaobat'];
             $idobat = $row['idobat'];
             $kategori_obat = $row['kategoriobat'];
-            $harga_jual = $row['hargajual'];
-            $harga_beli = $row['hargabeli'];
+            $harga_jual = number_format($row['hargajual'], 0, ',', '.');
+            $harga_beli = number_format($row['hargabeli'], 0, ',', '.');
             $stok_obat = $row['stok_obat'];
           ?>
             <div class="card">
