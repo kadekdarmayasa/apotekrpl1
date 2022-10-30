@@ -59,7 +59,7 @@
 <!-- Akhir Item 4 - Supplier -->
 
 <!-- Awal Item 5 - Transaksi -->
-<a href="" class="item transaksi">
+<a href="./transaksi.php" class="item transaksi">
   <div class="picture">
     <i class="fa-solid fa-money-bill-transfer"></i>
   </div>
