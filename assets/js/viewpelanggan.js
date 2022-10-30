@@ -1,3 +1,7 @@
+import search from './search.js';
+import { deleteConfirmation } from './action-buttons.js';
+import './dropdown.js';
+search('pelanggan');
 const recipePhotos = document.querySelectorAll('.foto-resep');
 
 recipePhotos.forEach(function (item) {
@@ -13,33 +17,16 @@ recipePhotos.forEach(function (item) {
 	});
 });
 
-function confirmation(idpelanggan) {
-	Swal.fire({
-		icon: 'question',
-		text: 'Apakah anda yakin ingin mengahapus pelanggan ini?',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			location.href = '?idpelanggan='.concat(idpelanggan);
-		}
+document.querySelectorAll('#delete-btn').forEach(function (btn) {
+	btn.addEventListener('click', function () {
+		const name = this.dataset.name;
+		const value = this.dataset.idpelanggan;
+		deleteConfirmation(name, value);
 	});
-}
+});
 
 document.getElementById('add-button').addEventListener('click', function () {
 	Swal.fire({
 		template: '#tambah-data-pelanggan',
 	});
-});
-
-const searchForm = document.getElementById('search');
-searchForm.addEventListener('input', function () {
-	const xhr = new XMLHttpRequest();
-
-	xhr.onreadystatechange = function () {
-		if (this.readyState == 4 || this.status == 200) {
-			document.querySelector('.cards').innerHTML = this.response;
-		}
-	};
-
-	xhr.open('GET', '../ajax/pelanggan.php?key=' + this.value);
-	xhr.send();
 });

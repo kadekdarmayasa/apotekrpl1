@@ -1,10 +1,14 @@
 <?php
 session_start();
+include '../app/koneksi.php';
+include '../app/functions.php';
+$_SESSION['view'] = 'supplier';
+
 if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
 } else {
-  if ($_SESSION['userinfo']['leveluser'] != 'user_admin') {
+  if ($_SESSION['userinfo']['leveluser'] != 'admin') {
     echo "
       <script>
         alert('Anda adalah karyawan');
@@ -14,22 +18,17 @@ if (!isset($_SESSION['userinfo']['username'])) {
   }
 }
 
-include '../app/koneksi.php';
-include '../app/functions.php';
-$_SESSION['view'] = 'supplier';
-
+// Insert Statement for Supplier
 if (isset($_POST['submit-button'])) {
   $perusahaan = $_POST['perusahaan'];
   $keterangan = $_POST['keterangan'];
 
   $affectedRow = insert("INSERT INTO tb_supplier VALUES (null, '$perusahaan', '$keterangan')");
-  if ($affectedRow > 0) {
-    $successfullyAdded = true;
-  } else {
-    $successfullyAdded = false;
-  }
+
+  $successfullyAdded = $affectedRow > 0 ? true : false;
 }
 
+// Delete Statement for Supplier
 if (isset($_GET['idsupplier'])) {
   $queryDelete = mysqli_query($conn, "SELECT * FROM tb_supplier INNER JOIN tb_obat USING (idsupplier) WHERE tb_supplier.idsupplier=" . $_GET['idsupplier']);
 
@@ -41,12 +40,10 @@ if (isset($_GET['idsupplier'])) {
   }
 }
 
+// Search Statement for Supplier
 if (isset($_POST['search-keyword'])) {
-  $keyword = $_POST['search-keyword'];
-  $querySupplier = mysqli_query($conn, "SELECT * FROM tb_supplier WHERE perusahaan LIKE '%$keyword%'");
-  if (mysqli_num_rows($querySupplier) == 0) {
-    $isEmptyResult = true;
-  }
+  $querySupplier = search('tb_supplier', 'perusahaan', $_POST['search-keyword']);
+  if (mysqli_num_rows($querySupplier) == 0) $isEmptyResult = true;
 } else {
   $querySupplier = mysqli_query($conn, "SELECT * FROM tb_supplier");
 }
@@ -64,12 +61,20 @@ if (isset($_POST['search-keyword'])) {
     <div class="sidebar-content">
       <h2>Daftar Supplier</h2>
 
-      <!-- Awal Search Bar -->
-      <form method="post" action="viewsupplier.php" class="search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" name="search-keyword" placeholder="Cari supplier berdasarkan nama perusahaan..." id="keyword">
-      </form>
-      <!-- Akhir Search Bar -->
+      <div class="search-container">
+        <!-- Awal Search Bar -->
+        <form method="post" action="viewsupplier.php" class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" name="search-keyword" placeholder="Cari nama perusahaan..." id="keyword">
+        </form>
+        <!-- Akhir Search Bar -->
+
+        <!-- Print Button -->
+        <div class="print">
+          <a href="print-data-supplier.php">Print Data</a>
+        </div>
+        <!-- Print Button -->
+      </div>
 
       <!-- Awal Cards -->
       <div class="cards">
@@ -84,7 +89,7 @@ if (isset($_POST['search-keyword'])) {
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
                 <div class="actions">
-                  <a onclick="confirmation(<?= $row['idsupplier'] ?>)">
+                  <a data-name='idsupplier' data-idsupplier='<?= $row['idsupplier'] ?>' id='delete-btn'>
                     <i class="fa-solid fa-trash-can"></i>
                     Delete
                   </a>

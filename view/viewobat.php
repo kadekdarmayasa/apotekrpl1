@@ -1,11 +1,14 @@
 <?php
 session_start();
+include '../app/koneksi.php';
+include '../app/functions.php';
+$_SESSION['view'] = 'obat';
 
 if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
 } else {
-  if ($_SESSION['userinfo']['leveluser'] != 'user_admin') {
+  if ($_SESSION['userinfo']['leveluser'] != 'admin') {
     echo "
       <script>
         alert('Anda adalah karyawan');
@@ -14,10 +17,6 @@ if (!isset($_SESSION['userinfo']['username'])) {
     ";
   }
 }
-
-include '../app/koneksi.php';
-include '../app/functions.php';
-$_SESSION['view'] = 'obat';
 
 // Delete Statement
 if (isset($_GET['idobat'])) {
@@ -68,12 +67,21 @@ if (isset($_POST['search-keyword'])) {
     <div class="sidebar-content">
       <h2>Daftar Obat</h2>
 
-      <!-- Awal Search Bar -->
-      <form method="post" action="viewobat.php" class="search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" name="search-keyword" placeholder="Cari obat berdasarkan nama..." id="keyword">
-      </form>
-      <!-- Akhir Search Bar -->
+
+      <div class="search-container">
+        <!-- Awal Search Bar -->
+        <form method="post" action="viewobat.php" class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" name="search-keyword" placeholder="Cari obat berdasarkan nama..." id="keyword">
+        </form>
+        <!-- Akhir Search Bar -->
+
+        <!-- Print Button -->
+        <div class="print">
+          <a href="print-data-obat.php">Print Data</a>
+        </div>
+        <!-- Print Button -->
+      </div>
 
       <!-- Awal Cards -->
       <div class="cards">
@@ -101,7 +109,7 @@ if (isset($_POST['search-keyword'])) {
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
                 <div class="actions">
-                  <a onclick="confirmation(<?= $idobat; ?>)">
+                  <a id="delete-btn" data-idobat="<?= $idobat; ?>" data-name="idobat">
                     <i class="fa-solid fa-trash-can"></i>
                     Delete
                   </a>

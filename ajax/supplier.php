@@ -1,20 +1,19 @@
   <?php
   include '../app/koneksi.php';
+  include '../app/functions.php';
+
   if (isset($_GET['key'])) {
-    $keyword = $_GET['key'];
-    $queryPelanggan = mysqli_query($conn, "SELECT * FROM tb_supplier WHERE perusahaan LIKE '%$keyword%'");
-    if (mysqli_num_rows($queryPelanggan) == 0) {
-      $isEmptyResult = true;
-    }
+    $querySupplier = search('tb_supplier', 'perusahaan', $_GET['key']);
+    if (mysqli_num_rows($querySupplier) == 0) $isEmptyResult = true;
   } else {
-    $queryPelanggan = mysqli_query($conn, "SELECT * FROM tb_supplier");
+    $querySupplier = mysqli_query($conn, "SELECT * FROM tb_supplier");
   }
   ?>
 
   <?php if (@$isEmptyResult) : ?>
     <p>Supplier yang anda cari tidak ada.</p>
   <?php else : ?>
-    <?php while ($row = mysqli_fetch_assoc($queryPelanggan)) : ?>
+    <?php while ($row = mysqli_fetch_assoc($querySupplier)) : ?>
       <div class="card">
         <div class="card-header">
           <h2 class="company-name"><?= $row['perusahaan'] ?></h2>

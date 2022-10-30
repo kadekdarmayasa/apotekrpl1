@@ -1,0 +1,68 @@
+@import url('./login.css');
+
+.form-group:last-child {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: end;
+}
+
+.form-group:last-child a,
+.form-group:last-child button {
+	margin-top: 0;
+	outline: none;
+	border-radius: 4px;
+	padding: 12px 20px;
+	width: 220px;
+	height: 50px;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: inherit;
+	text-transform: uppercase;
+	cursor: pointer;
+	color: #4285f4;
+	background-color: transparent;
+}
+
+.form-group:last-child button {
+	border: 1px solid #4285f4;
+	margin-left: 20px;
+}
+
+table {
+	width: 100%;
+}
+
+table,
+tr,
+td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+}
+
+tr,
+td {
+	padding: 10px;
+	font-weight: 400;
+	color: #444;
+}
+
+td {
+	width: 30%;
+}
+
+td.right {
+	width: 60%;
+}
+
+.form {
+	width: 700px;
+}
+
+.form-hidden {
+	display: none;
+}

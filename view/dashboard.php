@@ -38,7 +38,7 @@ include '../template/header.php'
         <h3>Dashboard</h3>
         <!-- Awal Dashboard Items -->
         <div class="dashboard-items">
-          <?php if ($_SESSION['userinfo']['leveluser'] == 'user_admin') : ?>
+          <?php if ($_SESSION['userinfo']['leveluser'] == 'admin') : ?>
             <?php include '../template/menu-admin.php' ?>
           <?php else : ?>
             <?php include '../template/menu-karyawan.php' ?>

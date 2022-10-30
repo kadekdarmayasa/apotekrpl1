@@ -25,10 +25,15 @@ $_SESSION['view'] = 'register';
             <select name="idkaryawan" id="idkaryawan">
               <?php
               $hasilKaryawan = select("SELECT * FROM tb_karyawan WHERE idkaryawan NOT IN (SELECT idkaryawan FROM tb_login)");
-              while ($row = mysqli_fetch_assoc($hasilKaryawan)) :
+
+              if (mysqli_num_rows($hasilKaryawan) > 0) :
               ?>
-                <option value="<?= $row['idkaryawan'] ?>"><?= $row['namakaryawan']; ?></option>
-              <?php endwhile; ?>
+                <?php while ($row = mysqli_fetch_assoc($hasilKaryawan)) :  ?>
+                  <option value="<?= $row['idkaryawan'] ?>"><?= $row['namakaryawan']; ?></option>
+                <?php endwhile; ?>
+              <?php else : ?>
+                <option value="">Semua karyawan telah memiliki akun</option>
+              <?php endif; ?>
             </select>
           </div>
           <div class="form-group">
@@ -46,14 +51,21 @@ $_SESSION['view'] = 'register';
               <option value="user_karyawan">User Karyawan</option>
             </select>
           </div>
+          <?php if (mysqli_num_rows($hasilKaryawan) > 0) : ?>
+            <div class="form-group">
+              <button type="submit">Register</button>
+            </div>
+          <?php else : ?>
+            <div class="form-group">
+              <button disabled style="cursor: none;">Register</button>
+            </div>
+          <?php endif; ?>
           <div class="form-group">
-            <button type="submit">Register</button>
+            <a href="index.php" class="back-dashboard-button">Kembali ke dashboard</a>
           </div>
         </form>
       </div>
     </form>
-  </div>
-  <div class="form-panel two">
   </div>
 </div>
 

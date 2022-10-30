@@ -15,7 +15,7 @@ $leveluser = $_SESSION['userinfo']['leveluser'];
   <!-- Akhir Brand -->
   <!-- Awal sidebar menu -->
   <ul class="middle-menu">
-    <?php if ($leveluser == 'user_admin') : ?>
+    <?php if ($leveluser == 'admin') : ?>
       <!-- Dashboard Awal -->
       <li class="menu">
         <?php if ($view == 'dashboard') : ?>
@@ -50,10 +50,16 @@ $leveluser = $_SESSION['userinfo']['leveluser'];
 
       <!-- Transaksi Awal -->
       <li class="menu">
-        <a href="">
-          <i class="fa-solid fa-money-bill-transfer"></i>
-          Transaksi
-        </a>
+        <?php if ($view == 'transaksi') : ?>
+          <a href="../view/transaksi.php" class="active">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            Transaksi
+          <?php else : ?>
+            <a href="../view/transaksi.php">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              Transaksi
+            </a>
+          <?php endif; ?>
       </li>
       <!-- Transaksi Akhir -->
 
@@ -105,11 +111,14 @@ $leveluser = $_SESSION['userinfo']['leveluser'];
       </li>
       <!-- Akhir Karyawan -->
 
-      <li class="menu">
+      <!-- Registrasi Link -->
+      <li class="menu register-btn">
         <a href="../register.php">
           Registrasi
         </a>
       </li>
+      <!-- Registrasi Link -->
+
     <?php else : ?>
       <!-- Dashboard Awal -->
       <li class="menu">
@@ -129,10 +138,16 @@ $leveluser = $_SESSION['userinfo']['leveluser'];
 
       <!-- Transaksi Awal -->
       <li class="menu">
-        <a href="">
-          <i class="fa-solid fa-money-bill-transfer"></i>
-          Transaksi
-        </a>
+        <?php if ($view == 'transaksi') : ?>
+          <a href="../view/transaksi.php" class="active">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            Transaksi
+          <?php else : ?>
+            <a href="../view/transaksi.php">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              Transaksi
+            </a>
+          <?php endif; ?>
       </li>
       <!-- Transaksi Akhir -->
 

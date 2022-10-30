@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 *,
 html,
@@ -15,7 +16,7 @@ html {
 }
 
 body {
-	font-family: 'Quicksand', sans-serif;
+	font-family: 'Plus Jakarta Sans', sans-serif;
 	background-image: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -144,14 +145,13 @@ body {
 .two .form-group input:focus {
 	color: #ffffff;
 }
-.form-group button {
+.form-group button,
+.form-group a.back-dashboard-button {
 	outline: none;
-	background: #4285f4;
 	width: 100%;
 	border: 0;
 	border-radius: 4px;
 	padding: 12px 20px;
-	color: #ffffff;
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: 500;
@@ -159,6 +159,20 @@ body {
 	text-transform: uppercase;
 	cursor: pointer;
 }
+
+.form-group button {
+	background: #4285f4;
+	color: #ffffff;
+	margin-top: 20px;
+}
+
+.form-group a.back-dashboard-button {
+	text-decoration: none;
+	text-align: center;
+	border: 1px solid #4285f4;
+	color: #4285f4;
+}
+
 .two .form-group button {
 	background: #ffffff;
 	color: #4285f4;
@@ -246,6 +260,7 @@ body {
 	padding: 4px 0;
 	color: #4285f4;
 	font-size: 24px;
+	letter-spacing: 2px;
 	font-weight: 700;
 	text-transform: uppercase;
 }

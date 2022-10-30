@@ -68,12 +68,20 @@ $_SESSION['view'] = 'pelanggan';
     <div class="sidebar-content">
       <h2>Daftar Pelanggan</h2>
 
-      <!-- Awal Search Bar -->
-      <form method="post" action="viewpelanggan.php" class="search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" name="search-keyword" placeholder="Cari pelanggan berdasarkan nama..." id="search">
-      </form>
-      <!-- Akhir Search Bar -->
+      <div class="search-container">
+        <!-- Awal Search Bar -->
+        <form method="post" action="viewpelanggan.php" class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" name="search-keyword" placeholder="Cari pelanggan berdasarkan nama..." id="keyword">
+        </form>
+        <!-- Akhir Search Bar -->
+
+        <!-- Print Button -->
+        <div class="print">
+          <a href="print-data-pelanggan.php">Print Data</a>
+        </div>
+        <!-- Print Button -->
+      </div>
 
       <!-- Awal Cards -->
       <div class="cards">
@@ -90,7 +98,7 @@ $_SESSION['view'] = 'pelanggan';
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
                 <div class="actions">
-                  <a onclick='confirmation(<?= $row["idpelanggan"] ?>)'>
+                  <a id="delete-btn" data-idpelanggan="<?= $row['idpelanggan']; ?>" data-name="idpelanggan">
                     <i class=" fa-solid fa-trash-can"></i>
                     Delete
                   </a>

@@ -7,15 +7,40 @@
 	font-weight: 600;
 }
 
+.search-container {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	justify-content: space-between;
+}
+
 .search-bar {
 	display: flex;
 	align-items: center;
 	background-color: white;
 	height: 50px;
+	width: 350px;
 	padding: 5px 10px;
 	max-width: 400px;
 	border-radius: 6px;
 	margin-top: 10px;
+}
+
+.print {
+	background-color: #4285f4;
+	width: 100px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border-radius: 6px;
+	margin-top: 10px;
+}
+
+.print a {
+	font-weight: f;
+	color: white;
 }
 
 .search-bar i {
@@ -28,7 +53,7 @@
 	padding: 5px;
 	border: none;
 	outline: none;
-	font-family: 'Quicksand', sans-serif;
+	font-family: 'Plus Jakarta Sans', sans-serif;
 	font-size: 1rem;
 	color: grey;
 	width: 100%;
@@ -104,13 +129,15 @@
 	transform: scale(1.01);
 }
 
-.card .nama-obat {
+.card .nama-obat,
+.card .tgl-transaksi {
 	font-weight: 600;
 	color: #1c1c1c;
 	font-size: 1.2rem;
 }
 
-.card .kategori-obat {
+.card .kategori-obat,
+.card .kategori-pelanggan {
 	color: #808080;
 	font-weight: 400;
 	margin-bottom: 0.5em;
@@ -128,14 +155,18 @@
 }
 
 .hargajual,
-.stok-obat {
+.stok-obat,
+.bayar,
+.kembali {
 	flex: 1;
 	border-radius: 5px;
 	margin-top: 2em;
 }
 
 .hargajual h5,
-.stok-obat h5 {
+.stok-obat h5,
+.bayar h5,
+.kembali h5 {
 	font-weight: 500;
 	font-size: 1rem;
 	margin-bottom: 3px;
@@ -146,18 +177,23 @@
 	color: grey;
 }
 
-.detail-price-stok {
+.detail-price-stok,
+.pricing {
 	display: flex;
 	justify-content: center;
 }
 
-.detail-price-stok > * {
+.detail-price-stok > *,
+.pricing > * {
 	margin: 1em;
 }
 
 .detail-price-stok .hargajual-detail p:first-child,
 .detail-price-stok .hargabeli-detail p:first-child,
-.detail-price-stok .stokobat-detail p:first-child {
+.detail-price-stok .stokobat-detail p:first-child,
+.pricing .bayar p:first-child,
+.pricing .kembali p:first-child,
+.pricing .total-bayar p:first-child {
 	margin-bottom: 5px;
 	color: rgb(103, 148, 255);
 }
@@ -211,7 +247,7 @@
 	border-radius: 8px;
 	padding: 10px;
 	outline: none;
-	font-family: 'Quicksand', sans-serif;
+	font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .input-item input {
@@ -237,7 +273,7 @@
 	border: none;
 	background-color: rgb(114, 159, 255);
 	color: white;
-	font-family: 'Quicksand', sans-serif;
+	font-family: 'Plus Jakarta Sans', sans-serif;
 	padding: 0.6em;
 	font-size: 1rem;
 	border-radius: 6px;

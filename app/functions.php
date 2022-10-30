@@ -20,7 +20,7 @@ function getNumRows($query)
 
 function setLevelUser($leveluser)
 {
-  return $leveluser == 'user_admin' ?  'admin' :  'karyawan';
+  return $leveluser == 'admin' ?  'admin' :  'karyawan';
 }
 
 function getLevelUser($leveluser)
@@ -113,4 +113,11 @@ function upload()
   move_uploaded_file($tmp_name, "../assets/img/" . $name_file_new);
 
   return $name_file_new;
+}
+
+function search($tableName, $condition, $keyword)
+{
+  global $conn;
+  $querySearch = mysqli_query($conn, "SELECT * FROM $tableName WHERE $condition LIKE '%$keyword%'");
+  return $querySearch;
 }

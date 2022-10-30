@@ -6,6 +6,7 @@ if ($_SESSION['view'] != 'register') {
   header('Location: register.php');
   exit;
 }
+
 $_SESSION['view'] = 'proses_register';
 $leveluser = $_POST['leveluser'];
 $usernameRegis = $_POST['username'];

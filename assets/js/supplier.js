@@ -1,25 +1,18 @@
+import search from './search.js';
+import { deleteConfirmation } from './action-buttons.js';
+import './dropdown.js';
+search('supplier');
+
 document.getElementById('add-button').addEventListener('click', function () {
 	Swal.fire({
 		template: '#tambah-data-supplier',
 	});
 });
 
-const confirmation = (idsupplier) => {
-	Swal.fire({
-		icon: 'question',
-		text: 'Apakah anda yakin ingin mengahapus obat ini?',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			location.href = '?idsupplier='.concat(idsupplier);
-		}
+document.querySelectorAll('#delete-btn').forEach(function (btn) {
+	btn.addEventListener('click', function () {
+		const name = this.dataset.name;
+		const value = this.dataset.idsupplier;
+		deleteConfirmation(name, value);
 	});
-};
-
-document.getElementById('keyword').addEventListener('input', function () {
-	const xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function () {
-		document.querySelector('.cards').innerHTML = this.response;
-	};
-	xhr.open('GET', '../ajax/supplier.php?key=' + this.value);
-	xhr.send();
 });

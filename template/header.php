@@ -40,10 +40,9 @@ $view = $_SESSION['view'];
   <?php elseif ($view == 'login' || $view == 'register') : ?>
     <?php if ($view == 'login') : ?>
       <title>Login - Apotek Media Utama</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-      <link rel="stylesheet" href="assets/css/login.css">
+    <?php else :  ?>
+      <title>Register - Apotek Media Utama</title>
     <?php endif; ?>
-    <title>Register - Apotek Media Utama</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="assets/css/login.css">
 
@@ -79,6 +78,22 @@ $view = $_SESSION['view'];
     <title>Obat - Apotek Media Utama</title>
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/view.css">
+
+  <?php elseif ($view == 'transaksi') : ?>
+    <title>Transaksi - Apotek Media Utama</title>
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/view.css">
+    <link rel="stylesheet" href="../assets/css/transaksi.css">
+
+  <?php elseif ($view == 'tambah-transaksi') : ?>
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/view.css">
+    <link rel="stylesheet" href="../assets/css/tambah-transaksi.css">
+
+  <?php elseif ($view == 'transaksi-detail') : ?>
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/view.css">
+    <link rel="stylesheet" href="../assets/css/tambah-transaksi.css">
   <?php endif ?>
 </head>
 

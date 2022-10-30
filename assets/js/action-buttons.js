@@ -13,3 +13,17 @@ window.addEventListener('click', function (event) {
 		}
 	}
 });
+
+export function deleteConfirmation(name, value) {
+	Swal.fire({
+		icon: 'question',
+		text: 'Apakah anda yakin ingin mengahapus data ini?',
+		showCancelButton: true,
+		cancelButtonText: 'Tidak',
+		confirmButtonText: 'Iya',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			location.href = `?${name}=${value}`;
+		}
+	});
+}

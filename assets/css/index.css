@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 * {
 	margin: 0;
@@ -14,7 +15,7 @@ a {
 body {
 	background-color: #f9f9f9;
 	max-width: 1550px;
-	font-family: 'Quicksand', sans-serif;
+	font-family: 'Plus Jakarta Sans', sans-serif;
 	margin: auto;
 }
 
@@ -85,7 +86,7 @@ body {
 	font-weight: 500;
 }
 
-.middle-menu .menu:last-child a {
+.middle-menu .menu.register-btn a {
 	width: 100%;
 	display: block;
 	color: black;
@@ -99,7 +100,7 @@ body {
 	color: rgb(27, 114, 255);
 }
 
-.middle-menu .menu:last-child:hover a {
+.middle-menu .menu.register-btn:hover a {
 	background-color: rgb(27, 114, 255);
 	color: white;
 }

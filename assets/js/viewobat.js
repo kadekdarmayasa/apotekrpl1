@@ -1,4 +1,7 @@
-const cards = document.querySelectorAll('.card');
+import search from './search.js';
+import { deleteConfirmation } from './action-buttons.js';
+import './dropdown.js';
+search('obat');
 
 document.getElementById('add-button').addEventListener('click', function () {
 	Swal.fire({
@@ -45,22 +48,10 @@ document.querySelectorAll('.update').forEach(function (item) {
 	item.addEventListener('click', function (event) {});
 });
 
-document.getElementById('keyword').addEventListener('input', function () {
-	const xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function () {
-		document.querySelector('.cards').innerHTML = this.response;
-	};
-	xhr.open('GET', '../ajax/obat.php?key=' + this.value);
-	xhr.send();
-});
-
-function confirmation(idpelanggan) {
-	Swal.fire({
-		icon: 'question',
-		text: 'Apakah anda yakin ingin mengahapus obat ini?',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			location.href = '?idobat='.concat(idpelanggan);
-		}
+document.querySelectorAll('#delete-btn').forEach(function (btn) {
+	btn.addEventListener('click', function () {
+		const name = this.dataset.name;
+		const value = this.dataset.idobat;
+		deleteConfirmation(name, value);
 	});
-}
+});
