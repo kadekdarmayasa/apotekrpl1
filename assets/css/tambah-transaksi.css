@@ -66,3 +66,11 @@ td.right {
 .form-hidden {
 	display: none;
 }
+
+.grand-total-table,
+tr,
+td,
+th {
+	border: 2px solid rgb(136, 136, 136);
+	padding: 0.5em;
+}

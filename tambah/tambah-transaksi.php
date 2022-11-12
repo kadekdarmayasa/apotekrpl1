@@ -40,13 +40,21 @@ if (isset($_POST['simpan_langganan'])) {
       <h1>Tambah Transaksi</h1>
     </div>
     <div class="form-content">
-      <form method="POST" action="">
-        <!-- Field Kategori Pelanggan -->
+      <form method="POST" action="tambah-transaksi.php" id="form">
         <div class="form-group show">
           <label for="kategoripelanggan">Kategori Pelanggan</label>
           <select name="kategoripelanggan" id="kategoripelanggan" required>
-            <option value="langganan">Langganan</option>
-            <option value="umum">Umum</option>
+            <?php if (@$_POST['kategoripelanggan'] == 'pelanggan') : ?>
+              <option value="pelanggan" selected>Langganan</option>
+            <?php else : ?>
+              <option value="pelanggan">Langganan</option>
+            <?php endif; ?>
+
+            <?php if (@$_POST['kategoripelanggan'] == 'umum') : ?>
+              <option value="umum" selected>Umum</option>
+            <?php else :  ?>
+              <option value="umum">Umum</option>
+            <?php endif; ?>
           </select>
         </div>
         <div class="form-group">
@@ -56,10 +64,10 @@ if (isset($_POST['simpan_langganan'])) {
       </form>
 
 
-      <?php if (isset($_POST['kategoripelanggan'])) : ?>
+      <?php if (@$_POST['kategoripelanggan'] == 'pelanggan') : ?>
+        <?php echo 'Kategori Pelanggan : ' . $_POST['kategoripelanggan'];  ?>
         <form action="" method="POST" style="margin-top: 4rem ;">
-          <!-- Field Id Pelanggan -->
-          <div class="form-group hidden">
+          <div class="form-group">
             <label for="namapelanggan">Nama Pelanggan</label>
             <input list="listpelanggan" id="namapelanggan" name="namapelanggan">
             <datalist id="listpelanggan">
@@ -76,7 +84,31 @@ if (isset($_POST['simpan_langganan'])) {
             <button type="submit" name="simpan_langganan" class="submit-btn">Submit</button>
           </div>
         </form>
-        <!-- </div> -->
+      <?php
+      elseif (@$_POST['kategoripelanggan'] == 'umum') :
+        $id_pelanggan = '10';
+        $id_karyawan = $_SESSION['userinfo']['idkaryawan'];
+        $tgl_transaksi = date("Y-m-d");
+        $kategori_pelanggan = 'umum';
+
+        mysqli_query($conn, 'SET FOREIGN_KEY_CHECKS=0');
+
+        mysqli_query($conn, "INSERT INTO tb_transaksi VALUES(null, '$id_pelanggan', '$id_karyawan', '$tgl_transaksi', '$kategori_pelanggan', '0', '0', '0')");
+
+        $query_transaksi = mysqli_query($conn, "SELECT LAST_INSERT_ID()");
+        $hasil_id_transaksi = mysqli_fetch_row($query_transaksi);
+        $_SESSION['idtransaksi'] = $hasil_id_transaksi[0];
+
+        if (!$hasil_id_transaksi) {
+          die("Gagal " . mysqli_error($conn));
+        } else {
+          echo "
+            <script>
+              window.location = 'tambah-detail-transaksi.php';
+            </script>
+          ";
+        }
+      ?>
       <?php endif; ?>
 
     </div>
