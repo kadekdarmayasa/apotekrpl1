@@ -58,14 +58,13 @@ if (isset($_POST['simpan_langganan'])) {
           </select>
         </div>
         <div class="form-group">
-          <a href="../view/transaksi.php" class="back-dashboard-button">Kembali</a>
-          <button type="submit" class="submit-btn" id="submit-next-btn">Selanjutnya</button>
+          <a href="../view/transaksi.php" class="btn btn-outline-danger">Kembali</a>
+          <button type="submit" class="btn btn-outline-primary next">Selanjutnya</button>
         </div>
       </form>
 
 
       <?php if (@$_POST['kategoripelanggan'] == 'pelanggan') : ?>
-        <?php echo 'Kategori Pelanggan : ' . $_POST['kategoripelanggan'];  ?>
         <form action="" method="POST" style="margin-top: 4rem ;">
           <div class="form-group">
             <label for="namapelanggan">Nama Pelanggan</label>
@@ -75,13 +74,13 @@ if (isset($_POST['simpan_langganan'])) {
               $query = select("SELECT * FROM tb_pelanggan");
               while ($row = mysqli_fetch_assoc($query)) :
               ?>
-                <option value="<?= $row['namalengkap'] ?>"></option>
+                <option value="<?= $row['namalengkap'] ?>" />
               <?php endwhile; ?>
             </datalist>
           </div>
 
           <div class="form-group">
-            <button type="submit" name="simpan_langganan" class="submit-btn">Submit</button>
+            <button type="submit" name="simpan_langganan" class="btn btn-primary" style="width: 100%;">Submit</button>
           </div>
         </form>
       <?php

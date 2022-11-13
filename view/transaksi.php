@@ -14,10 +14,8 @@ if (isset($_GET['idtransaksi'])) {
 // Search Statement
 if (isset($_POST['search-keyword'])) {
   $keyword = $_POST['search-keyword'];
-  $queryTransaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi WHERE tgltransaksi LIKE '%$keyword%'");
-  if (mysqli_num_rows($queryTransaksi) == 0) {
-    $isEmptyResult = true;
-  }
+  $queryTransaksi = search('tb_transaksi', 'tgltransaksi', $keyword);
+  if (mysqli_num_rows($queryTransaksi) == 0) $isEmptyResult = true;
 } else {
   $queryTransaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi ORDER BY idtransaksi DESC");
 }
@@ -38,15 +36,13 @@ if (isset($_POST['search-keyword'])) {
         <!-- Awal Search Bar -->
         <form method="post" action="transaksi.php" class="search-bar">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="search-keyword" placeholder="Cari transaksi berdasarkan tanggal..." id="keyword">
+          <?php if (@$_POST['search-keyword']) : ?>
+            <input type="text" name="search-keyword" value="<?= $keyword ?>" placeholder="Cari transaksi..." id="keyword">
+          <?php else : ?>
+            <input type="text" name="search-keyword" placeholder="Cari transaksi..." id="keyword">
+          <?php endif; ?>
         </form>
         <!-- Akhir Search Bar -->
-
-        <!-- Print Button -->
-        <div class="print">
-          <a href="table-print-obat.php">Print Data</a>
-        </div>
-        <!-- Print Button -->
       </div>
 
       <div class="cards">
@@ -56,15 +52,13 @@ if (isset($_POST['search-keyword'])) {
           <?php
           while ($row = mysqli_fetch_assoc($queryTransaksi)) :
             $tgl_transaksi = $row['tgltransaksi'];
-            $kategori_pelanggan = $row['kategoripelanggan'];
-            $id_karyawan = $row['idkaryawan'];
-            $id_pelanggan = $row['idpelanggan'];
             $id_transaksi = $row['idtransaksi'];
-            $total_bayar = number_format($row['totalbayar'], 0, ',', '.');
+            $kategori_pelanggan = $row['kategoripelanggan'];
             $bayar =  number_format($row['bayar'], 0, ',', '.');
             $kembali =  number_format($row['kembali'], 0, ',', '.');
           ?>
             <div class="card">
+              <!-- Card Header -->
               <div class="card-header">
                 <div class="title">
                   <h3 class="tgl-transaksi"><?= $tgl_transaksi; ?></h3>
@@ -78,16 +72,15 @@ if (isset($_POST['search-keyword'])) {
                     <i class="fa-solid fa-trash-can"></i>
                     Delete
                   </a>
-                  <a href="">
-                    <i class=" fa-solid fa-pen-to-square"></i>
-                    Update
-                  </a>
-                  <a class="detail" data-tgl_transaksi="<?= $tgl_transaksi ?>" data-kategori_pelanggan="<?= $kategori_pelanggan ?>" data-idkaryawan="<?= $id_karyawan ?>" data-idpelanggan="<?= $id_pelanggan ?>" data-idtransaksi="<?= $id_transaksi ?>" data-totalbayar="<?= $total_bayar ?>" data-bayar="<?= $bayar ?>" data-kembali="<?= $kembali ?>">
+                  <a class="detail" href="../tambah/tambah-detail-transaksi.php?idtransaksi=<?= $id_transaksi ?>">
                     <i class="fa-solid fa-info"></i>
                     Detail
                   </a>
                 </div>
               </div>
+              <!-- Akhir Card Header -->
+
+              <!-- Card Body -->
               <div class="price-stok">
                 <div class="bayar">
                   <h5>Bayar</h5>
@@ -98,6 +91,7 @@ if (isset($_POST['search-keyword'])) {
                   <p>Rp. <?= $kembali ?></p>
                 </div>
               </div>
+              <!-- Akhir Card Body -->
             </div>
           <?php endwhile; ?>
         <?php endif; ?>

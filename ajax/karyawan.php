@@ -1,21 +1,22 @@
   <?php
   include '../app/koneksi.php';
+  include '../app/functions.php';
+
   if (isset($_GET['key'])) {
     $keyword = $_GET['key'];
-    $queryKaryawan = mysqli_query($conn, "SELECT * FROM tb_karyawan WHERE namakaryawan LIKE '%$keyword%'");
-    if (mysqli_num_rows($queryKaryawan) == 0) {
-      $isEmptyResult = true;
-    }
+    $queryKaryawan = search('tb_karyawan', 'namakaryawan', $keyword);
+    if (mysqli_num_rows($queryKaryawan) == 0) $isEmptyResult = true;
   } else {
     $queryKaryawan = mysqli_query($conn, "SELECT * FROM tb_karyawan");
   }
   ?>
 
   <?php if (@$isEmptyResult) : ?>
-    <p>Karyawan yang anda cari tidak ada.</p>
+    <p>Tidak terdapat karyawan dengan nama <b><?= $keyword; ?></b></p>
   <?php else : ?>
     <?php while ($row = mysqli_fetch_assoc($queryKaryawan)) : ?>
       <div class="card">
+        <!-- Card Header -->
         <div class="card-header">
           <div class="title">
             <h3 class="nama"><?= $row['namakaryawan']; ?></h3>
@@ -24,7 +25,7 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
           </div>
           <div class="actions">
-            <a onclick='confirmation(<?= $row["idkaryawan"] ?>)'>
+            <a data-name='idkaryawan' data-idkaryawan='<?= $row['idkaryawan'] ?>' id='delete-btn'>
               <i class=" fa-solid fa-trash-can"></i>
               Delete
             </a>
@@ -34,7 +35,11 @@
             </a>
           </div>
         </div>
+        <!-- Akhir Card Header -->
+
         <hr>
+
+        <!-- Card Body -->
         <div class="card-body">
           <div class="first-item">
             <div class="phone">
@@ -51,6 +56,7 @@
             <p><?= $row['alamat']; ?></p>
           </div>
         </div>
+        <!-- Akhir Card Body -->
       </div>
     <?php endwhile; ?>
   <?php endif; ?>

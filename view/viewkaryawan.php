@@ -25,22 +25,16 @@ if (isset($_POST['submit-button'])) {
   $telp = htmlspecialchars($_POST['telp']);
   $alamat = htmlspecialchars($_POST['alamat']);
 
-  // Insert ke dalam tabel karyawan
   $queryKaryawan = insert("INSERT INTO tb_karyawan(idkaryawan, namakaryawan, alamat, telp) VALUES (null, '$namakaryawan', '$alamat', $telp)");
 
-  // Jika karyawan berhasil ditambahkan 
-  if ($queryKaryawan > 0) {
-    $successfullyAdded = true;
-  }
+  if ($queryKaryawan > 0) $successfullyAdded = true;
 }
 
 // Search Statement
 if (isset($_POST['search-keyword'])) {
   $keyword = $_POST['search-keyword'];
-  $queryKaryawan = mysqli_query($conn, "SELECT * FROM tb_karyawan WHERE namakaryawan LIKE '%$keyword%'");
-  if (mysqli_num_rows($queryKaryawan) == 0) {
-    $isEmptyResult = true;
-  }
+  $queryKaryawan = search('tb_karyawan', 'namakaryawan', $keyword);
+  if (mysqli_num_rows($queryKaryawan) == 0) $isEmptyResult = true;
 } else {
   $queryKaryawan = mysqli_query($conn, "SELECT * FROM tb_karyawan ORDER BY idkaryawan DESC");
 }
@@ -48,9 +42,7 @@ if (isset($_POST['search-keyword'])) {
 // Delete Statement
 if (isset($_GET['idkaryawan'])) {
   $affectedRow = delete("DELETE FROM tb_karyawan WHERE idkaryawan=" . $_GET['idkaryawan']);
-  if ($affectedRow > 0) {
-    $isDeleted = true;
-  }
+  if ($affectedRow > 0) $isDeleted = true;
 }
 ?>
 
@@ -72,7 +64,11 @@ if (isset($_GET['idkaryawan'])) {
         <!-- Awal Search Bar -->
         <form method="post" action="viewkaryawan.php" class="search-bar">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="search-keyword" placeholder="Cari karyawan berdasarkan nama..." id="keyword">
+          <?php if (@$_POST['search-keyword']) : ?>
+            <input type="text" name="search-keyword" value="<?= $keyword ?>" placeholder="Cari karyawan..." id="keyword">
+          <?php else :  ?>
+            <input type="text" name="search-keyword" placeholder="Cari karyawan..." id="keyword">
+          <?php endif; ?>
         </form>
         <!-- Akhir Search Bar -->
 
@@ -85,10 +81,11 @@ if (isset($_GET['idkaryawan'])) {
 
       <div class="cards">
         <?php if (@$isEmptyResult) : ?>
-          <p>Karyawan yang anda cari tidak ada.</p>
+          <p>Tidak terdapat karyawan dengan nama <b><?= $keyword; ?></b></p>
         <?php else : ?>
           <?php while ($row = mysqli_fetch_assoc($queryKaryawan)) : ?>
             <div class="card">
+              <!-- Card Header -->
               <div class="card-header">
                 <div class="title">
                   <h3 class="nama"><?= $row['namakaryawan']; ?></h3>
@@ -97,7 +94,7 @@ if (isset($_GET['idkaryawan'])) {
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
                 <div class="actions">
-                  <a data-name='idsupplier' data-idkaryawan='<?= $row['idsupplier'] ?>' id='delete-btn'>
+                  <a data-name='idkaryawan' data-idkaryawan='<?= $row['idkaryawan'] ?>' id='delete-btn'>
                     <i class=" fa-solid fa-trash-can"></i>
                     Delete
                   </a>
@@ -107,7 +104,11 @@ if (isset($_GET['idkaryawan'])) {
                   </a>
                 </div>
               </div>
+              <!-- Akhir Card Header -->
+
               <hr>
+
+              <!-- Card Body -->
               <div class="card-body">
                 <div class="first-item">
                   <div class="phone">
@@ -124,6 +125,7 @@ if (isset($_GET['idkaryawan'])) {
                   <p><?= $row['alamat']; ?></p>
                 </div>
               </div>
+              <!-- Akhir Card Body -->
             </div>
           <?php endwhile; ?>
         <?php endif; ?>

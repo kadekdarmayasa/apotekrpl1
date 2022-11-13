@@ -1,14 +1,15 @@
 <?php
 session_start();
+include "../app/koneksi.php";
+include '../app/functions.php';
+$_SESSION['view'] = 'pelanggan';
 
 if (!isset($_SESSION['userinfo']['username'])) {
   header('Location: ../login.php');
   exit;
 }
 
-include "../app/koneksi.php";
-include '../app/functions.php';
-
+// Insert Statement
 if (isset($_POST['submit-button'])) {
   $filename = upload();
   $namalengkap = $_POST['namalengkap'];
@@ -17,30 +18,27 @@ if (isset($_POST['submit-button'])) {
   $usia = $_POST['usia'];
 
   if ($filename) {
-    $affectedRow = insert("INSERT INTO tb_pelanggan
-    (idpelanggan, namalengkap, alamat, telp, usia, buktifotoresep) 
-    VALUES 
-    (null, '$namalengkap', '$alamat', $telp, $usia, '$filename')
-  ");
+    $affectedRow = insert(
+      "INSERT INTO tb_pelanggan
+      (idpelanggan, namalengkap, alamat, telp, usia, buktifotoresep) 
+      VALUES 
+      (null, '$namalengkap', '$alamat', $telp, $usia, '$filename')"
+    );
 
-    if ($affectedRow > 0) {
-      $successfullyAdded = true;
-    } else {
-      $successfullyAdded = false;
-    }
+    $successfullyAdded = $affectedRow > 0 ? true : false;
   }
 }
 
+// Search Statement
 if (isset($_POST['search-keyword'])) {
   $keyword = $_POST['search-keyword'];
-  $queryPelanggan = mysqli_query($conn, "SELECT * FROM tb_pelanggan WHERE namalengkap LIKE '%$keyword%'");
-  if (mysqli_num_rows($queryPelanggan) == 0) {
-    $isEmptyResult = true;
-  }
+  $queryPelanggan = search("tb_pelanggan", "namalengkap", $keyword);
+  if (mysqli_num_rows($queryPelanggan) == 0) $isEmptyResult = true;
 } else {
   $queryPelanggan = mysqli_query($conn, "SELECT * FROM tb_pelanggan");
 }
 
+// Delete Statement
 if (isset($_GET['idpelanggan'])) {
   $queryDelete = mysqli_query($conn, "SELECT * FROM tb_pelanggan INNER JOIN tb_transaksi USING (idpelanggan) WHERE tb_pelanggan.idpelanggan=" . $_GET['idpelanggan']);
 
@@ -52,7 +50,6 @@ if (isset($_GET['idpelanggan'])) {
   }
 }
 
-$_SESSION['view'] = 'pelanggan';
 ?>
 <?php include '../template/header.php' ?>
 <div class="container">
@@ -72,7 +69,11 @@ $_SESSION['view'] = 'pelanggan';
         <!-- Awal Search Bar -->
         <form method="post" action="viewpelanggan.php" class="search-bar">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="search-keyword" placeholder="Cari pelanggan berdasarkan nama..." id="keyword">
+          <?php if (@$_POST['search-keyword']) : ?>
+            <input type="text" name="search-keyword" value="<?= $_POST['search-keyword'] ?>" placeholder="Cari pelanggan..." id="keyword">
+          <?php else : ?>
+            <input type="text" name="search-keyword" placeholder="Cari pelanggan..." id="keyword">
+          <?php endif; ?>
         </form>
         <!-- Akhir Search Bar -->
 
@@ -86,10 +87,11 @@ $_SESSION['view'] = 'pelanggan';
       <!-- Awal Cards -->
       <div class="cards">
         <?php if (@$isEmptyResult) : ?>
-          <p>Pelanggan yang anda cari tidak ada.</p>
+          <p>Pelanggan dengan nama <b><?= $keyword ?></b> tidak ada di dalam daftar.</p>
         <?php else : ?>
           <?php while ($row = mysqli_fetch_assoc($queryPelanggan)) : ?>
             <div class="card">
+              <!-- Card Header -->
               <div class="card-header">
                 <div class="title">
                   <h3 class="nama"><?= $row['namalengkap']; ?></h3>
@@ -112,7 +114,11 @@ $_SESSION['view'] = 'pelanggan';
                   </a>
                 </div>
               </div>
+              <!-- Akhir Card Header -->
+
               <hr>
+
+              <!-- Card Body -->
               <div class="card-body">
                 <div class="first-item">
                   <div class="phone">
@@ -133,6 +139,7 @@ $_SESSION['view'] = 'pelanggan';
                   <p><?= $row['alamat']; ?></p>
                 </div>
               </div>
+              <!-- Akhir Card Body -->
             </div>
           <?php endwhile; ?>
         <?php endif; ?>

@@ -19,7 +19,6 @@ while ($rowLevelUser = mysqli_fetch_row($allLevelUser)) {
 }
 ?>
 
-?>
 
 <?php
 session_start();

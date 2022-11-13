@@ -21,9 +21,7 @@ if (!isset($_SESSION['userinfo']['username'])) {
 // Delete Statement
 if (isset($_GET['idobat'])) {
   $affectedRow = delete("DELETE FROM tb_obat WHERE idobat=" . $_GET['idobat']);
-  if ($affectedRow > 0) {
-    $isDeleted = true;
-  }
+  if ($affectedRow > 0) $isDeleted = true;
 }
 
 // Insert Statement
@@ -37,20 +35,15 @@ if (isset($_POST['submit-button'])) {
   $keterangan = $_POST['keterangan'];
 
   $affectedRow = insert("INSERT INTO tb_obat VALUES (null, $idsupplier, '$namaobat', '$kategoriobat', '$hargajual', '$hargabeli', '$stokobat', '$keterangan')");
-  if ($affectedRow > 0) {
-    $successfullyAdded = true;
-  } else {
-    $successfullyAdded = false;
-  }
+
+  $successfullyAdded = $affectedRow > 0 ? true : false;
 }
 
 // Search Statement
 if (isset($_POST['search-keyword'])) {
   $keyword = $_POST['search-keyword'];
-  $queryObat = mysqli_query($conn, "SELECT * FROM tb_obat WHERE namaobat LIKE '%$keyword%'");
-  if (mysqli_num_rows($queryObat) == 0) {
-    $isEmptyResult = true;
-  }
+  $queryObat = search('tb_obat', 'namaobat', $keyword);
+  if (mysqli_num_rows($queryObat) == 0) $isEmptyResult = true;
 } else {
   $queryObat = mysqli_query($conn, "SELECT * FROM tb_obat ORDER BY idobat DESC");
 }
@@ -72,7 +65,11 @@ if (isset($_POST['search-keyword'])) {
         <!-- Awal Search Bar -->
         <form method="post" action="viewobat.php" class="search-bar">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="search-keyword" placeholder="Cari obat berdasarkan nama..." id="keyword">
+          <?php if (@$_POST['search-keyword']) : ?>
+            <input type="text" name="search-keyword" value="<?= $keyword ?>" placeholder="Cari obat..." id="keyword">
+          <?php else : ?>
+            <input type="text" name="search-keyword" placeholder="Cari obat..." id="keyword">
+          <?php endif; ?>
         </form>
         <!-- Akhir Search Bar -->
 
@@ -86,20 +83,20 @@ if (isset($_POST['search-keyword'])) {
       <!-- Awal Cards -->
       <div class="cards">
         <?php if (@$isEmptyResult) : ?>
-          <p>Obat yang anda cari tidak ada.</p>
+          <p>Tidak terdapat obat dengan nama <b><?= $keyword; ?></b></p>
         <?php else : ?>
           <?php
           while ($row = mysqli_fetch_assoc($queryObat)) :
-            $idsupplier = $row['idsupplier'];
+            $idobat = $row['idobat'];
             $keterangan = $row['keterangan'];
             $nama_obat = $row['namaobat'];
-            $idobat = $row['idobat'];
             $kategori_obat = $row['kategoriobat'];
             $harga_jual = number_format($row['hargajual'], 0, ',', '.');
             $harga_beli = number_format($row['hargabeli'], 0, ',', '.');
             $stok_obat = $row['stok_obat'];
           ?>
             <div class="card">
+              <!-- Card Header -->
               <div class="card-header">
                 <div class="title">
                   <h3 class="nama-obat"><?= $nama_obat; ?></h3>
@@ -123,6 +120,9 @@ if (isset($_POST['search-keyword'])) {
                   </a>
                 </div>
               </div>
+              <!-- Akhir Card Header -->
+
+              <!-- Card Body -->
               <div class="price-stok">
                 <div class="hargajual">
                   <h5>Harga</h5>
@@ -133,6 +133,7 @@ if (isset($_POST['search-keyword'])) {
                   <p><?= $stok_obat; ?></p>
                 </div>
               </div>
+              <!-- Akhir Card Body -->
             </div>
           <?php endwhile; ?>
         <?php endif; ?>

@@ -1,6 +1,6 @@
 let isActive = false;
 
-window.addEventListener('click', function (event) {
+window.addEventListener('click', (event) => {
 	if (event.target.classList.contains('button-menu')) {
 		if (isActive == false) {
 			event.target.nextElementSibling.style.display = 'flex';
@@ -14,7 +14,7 @@ window.addEventListener('click', function (event) {
 	}
 });
 
-export function deleteConfirmation(name, value) {
+export const deleteConfirmation = (name, value) => {
 	Swal.fire({
 		icon: 'question',
 		text: 'Apakah anda yakin ingin mengahapus data ini?',
@@ -26,4 +26,4 @@ export function deleteConfirmation(name, value) {
 			location.href = `?${name}=${value}`;
 		}
 	});
-}
+};

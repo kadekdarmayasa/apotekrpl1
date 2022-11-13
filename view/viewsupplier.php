@@ -18,7 +18,7 @@ if (!isset($_SESSION['userinfo']['username'])) {
   }
 }
 
-// Insert Statement for Supplier
+// Insert Statement 
 if (isset($_POST['submit-button'])) {
   $perusahaan = $_POST['perusahaan'];
   $keterangan = $_POST['keterangan'];
@@ -28,7 +28,7 @@ if (isset($_POST['submit-button'])) {
   $successfullyAdded = $affectedRow > 0 ? true : false;
 }
 
-// Delete Statement for Supplier
+// Delete Statement 
 if (isset($_GET['idsupplier'])) {
   $queryDelete = mysqli_query($conn, "SELECT * FROM tb_supplier INNER JOIN tb_obat USING (idsupplier) WHERE tb_supplier.idsupplier=" . $_GET['idsupplier']);
 
@@ -40,9 +40,10 @@ if (isset($_GET['idsupplier'])) {
   }
 }
 
-// Search Statement for Supplier
+// Search Statement
 if (isset($_POST['search-keyword'])) {
-  $querySupplier = search('tb_supplier', 'perusahaan', $_POST['search-keyword']);
+  $keyword = $_POST['search-keyword'];
+  $querySupplier = search('tb_supplier', 'perusahaan', $keyword);
   if (mysqli_num_rows($querySupplier) == 0) $isEmptyResult = true;
 } else {
   $querySupplier = mysqli_query($conn, "SELECT * FROM tb_supplier");
@@ -65,7 +66,11 @@ if (isset($_POST['search-keyword'])) {
         <!-- Awal Search Bar -->
         <form method="post" action="viewsupplier.php" class="search-bar">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="search-keyword" placeholder="Cari nama perusahaan..." id="keyword">
+          <?php if (@$_POST['search-keyword']) : ?>
+            <input type="text" name="search-keyword" value="<?= $keyword ?>" placeholder="Cari nama perusahaan..." id="keyword">
+          <?php else : ?>
+            <input type="text" name="search-keyword" placeholder="Cari nama perusahaan..." id="keyword">
+          <?php endif; ?>
         </form>
         <!-- Akhir Search Bar -->
 
@@ -79,10 +84,11 @@ if (isset($_POST['search-keyword'])) {
       <!-- Awal Cards -->
       <div class="cards">
         <?php if (@$isEmptyResult) : ?>
-          <p>Supplier yang anda cari tidak ada.</p>
+          <p>Tidak terdapat supplier dengan nama perusaahaan <b><?= $keyword; ?></b></p>
         <?php else : ?>
           <?php while ($row = mysqli_fetch_assoc($querySupplier)) : ?>
             <div class="card">
+              <!-- Card Header -->
               <div class="card-header">
                 <h2 class="company-name"><?= $row['perusahaan'] ?></h2>
                 <div class="button-menu">
@@ -99,8 +105,12 @@ if (isset($_POST['search-keyword'])) {
                   </a>
                 </div>
               </div>
+              <!-- Akhir Card Header -->
+
               <hr>
+              <!-- Card Body -->
               <p class="description"><?= $row['keterangan'] ?></p>
+              <!-- Akhir Card Body -->
             </div>
           <?php endwhile; ?>
         <?php endif; ?>

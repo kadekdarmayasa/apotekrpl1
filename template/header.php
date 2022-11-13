@@ -85,15 +85,18 @@ $view = $_SESSION['view'];
     <link rel="stylesheet" href="../assets/css/view.css">
     <link rel="stylesheet" href="../assets/css/transaksi.css">
 
+
   <?php elseif ($view == 'tambah-transaksi') : ?>
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/view.css">
     <link rel="stylesheet" href="../assets/css/tambah-transaksi.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 
   <?php elseif ($view == 'transaksi-detail') : ?>
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/view.css">
     <link rel="stylesheet" href="../assets/css/tambah-transaksi.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
   <?php endif ?>
 </head>
 

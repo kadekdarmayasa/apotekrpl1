@@ -1,8 +1,10 @@
   <?php
   include '../app/koneksi.php';
+  include '../app/functions.php';
+
   if (isset($_GET['key'])) {
     $keyword = $_GET['key'];
-    $queryTransaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi WHERE tgltransaksi LIKE '%$keyword%'");
+    $queryTransaksi = search('tb_transaksi', 'tgltransaksi', $keyword);
     if (mysqli_num_rows($queryTransaksi) == 0) {
       $isEmptyResult = true;
     }
@@ -26,6 +28,7 @@
       $kembali =  number_format($row['kembali'], 0, ',', '.');
     ?>
       <div class="card">
+        <!-- Card Header -->
         <div class="card-header">
           <div class="title">
             <h3 class="tgl-transaksi"><?= $tgl_transaksi; ?></h3>
@@ -49,6 +52,9 @@
             </a>
           </div>
         </div>
+        <!-- Akhir Card Header -->
+
+        <!-- Card Body -->
         <div class="price-stok">
           <div class="bayar">
             <h5>Bayar</h5>
@@ -58,6 +64,7 @@
             <h5>Kembali</h5>
             <p>Rp. <?= $kembali ?></p>
           </div>
+          <!-- Akhir Card Body -->
         </div>
       </div>
     <?php endwhile; ?>

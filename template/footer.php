@@ -35,8 +35,6 @@ $view = $_SESSION['view'];
 <?php elseif ($view == 'transaksi') : ?>
   <script src="../assets/js/transaksi.js" type="module"></script>
 
-<?php elseif ($view == 'tambah-transaksi') : ?>
-  <script src="../assets/js/tambah-transaksi.js"></script>
 <?php endif; ?>
 
 </body>

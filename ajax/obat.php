@@ -1,11 +1,11 @@
 <?php
 include '../app/koneksi.php';
+include '../app/functions.php';
+
 if (isset($_GET['key'])) {
   $keyword = $_GET['key'];
-  $queryObat = mysqli_query($conn, "SELECT * FROM tb_obat WHERE namaobat LIKE '%$keyword%'");
-  if (mysqli_num_rows($queryObat) == 0) {
-    $isEmptyResult = true;
-  }
+  $queryObat = search('tb_obat', 'namaobat', $keyword);
+  if (mysqli_num_rows($queryObat) == 0) $isEmptyResult = true;
 } else {
   $queryObat = mysqli_query($conn, "SELECT * FROM tb_obat ORDER BY idobat DESC");
 }
@@ -13,20 +13,20 @@ if (isset($_GET['key'])) {
 ?>
 
 <?php if (@$isEmptyResult) : ?>
-  <p>Obat yang anda cari tidak ada.</p>
+  <p>Tidak terdapat obat dengan nama <b><?= $keyword; ?></b></p>
 <?php else : ?>
   <?php
   while ($row = mysqli_fetch_assoc($queryObat)) :
-    $idsupplier = $row['idsupplier'];
+    $idobat = $row['idobat'];
     $keterangan = $row['keterangan'];
     $nama_obat = $row['namaobat'];
-    $idobat = $row['idobat'];
     $kategori_obat = $row['kategoriobat'];
     $harga_jual = $row['hargajual'];
     $harga_beli = $row['hargabeli'];
     $stok_obat = $row['stok_obat'];
   ?>
     <div class="card">
+      <!-- Card Header -->
       <div class="card-header">
         <div class="title">
           <h3 class="nama-obat"><?= $nama_obat; ?></h3>
@@ -36,7 +36,7 @@ if (isset($_GET['key'])) {
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
         <div class="actions">
-          <a onclick="confirmation(<?= $idobat; ?>)">
+          <a id="delete-btn" data-idobat="<?= $idobat; ?>" data-name="idobat">
             <i class=" fa-solid fa-trash-can"></i>
             Delete
           </a>
@@ -50,6 +50,9 @@ if (isset($_GET['key'])) {
           </a>
         </div>
       </div>
+      <!-- Akhir Card Header -->
+
+      <!-- Card Body -->
       <div class="price-stok">
         <div class="hargajual">
           <h5>Harga</h5>
@@ -60,6 +63,7 @@ if (isset($_GET['key'])) {
           <p><?= $stok_obat; ?></p>
         </div>
       </div>
+      <!-- Akhir Card Body -->
     </div>
   <?php endwhile; ?>
 <?php endif; ?>

@@ -3,16 +3,16 @@ import { deleteConfirmation } from './action-buttons.js';
 import './dropdown.js';
 search('supplier');
 
-document.getElementById('add-button').addEventListener('click', function () {
-	Swal.fire({
-		template: '#tambah-data-supplier',
-	});
-});
+window.addEventListener('click', (event) => {
+	if (event.target.id == 'add-button') {
+		Swal.fire({
+			template: '#tambah-data-supplier',
+		});
+	}
 
-document.querySelectorAll('#delete-btn').forEach(function (btn) {
-	btn.addEventListener('click', function () {
-		const name = this.dataset.name;
-		const value = this.dataset.idsupplier;
+	if (event.target.id == 'delete-btn') {
+		const name = event.target.dataset.name;
+		const value = event.target.dataset.idsupplier;
 		deleteConfirmation(name, value);
-	});
+	}
 });
