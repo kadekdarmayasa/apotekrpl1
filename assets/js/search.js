@@ -1,8 +1,8 @@
 const search = (page) => {
-	document.getElementById('keyword').addEventListener('input', () => {
+	document.getElementById('keyword').addEventListener('input', function () {
 		const xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = () => {
-			document.querySelector('.cards').innerHTML = this.response;
+			document.querySelector('.cards').innerHTML = xhr.response;
 		};
 		xhr.open('GET', `../ajax/${page}.php?key=` + this.value);
 		xhr.send();

@@ -64,14 +64,17 @@ if (isset($_POST['search-keyword'])) {
                   <h3 class="tgl-transaksi"><?= $tgl_transaksi; ?></h3>
                   <p class="kategori-pelanggan"><?= $kategori_pelanggan ?></p>
                 </div>
+
                 <div class="button-menu">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
                 <div class="actions">
-                  <a id="delete-btn" data-name="idtransaksi" data-id_transaksi="<?= $id_transaksi ?>">
-                    <i class="fa-solid fa-trash-can"></i>
-                    Delete
-                  </a>
+                  <?php if (@$_SESSION['userinfo']['leveluser'] != 'user_karyawan') :  ?>
+                    <a id="delete-btn" data-name="idtransaksi" data-id_transaksi="<?= $id_transaksi ?>">
+                      <i class="fa-solid fa-trash-can"></i>
+                      Delete
+                    </a>
+                  <?php endif; ?>
                   <a class="detail" href="../tambah/tambah-detail-transaksi.php?idtransaksi=<?= $id_transaksi ?>">
                     <i class="fa-solid fa-info"></i>
                     Detail
@@ -98,11 +101,13 @@ if (isset($_POST['search-keyword'])) {
       </div>
 
       <!-- Awal Add button -->
-      <button id="add-button">
-        <a href="../tambah/tambah-transaksi.php" style="display: block; color: white;">
-          <i class="fa-solid fa-plus"></i>
-        </a>
-      </button>
+      <?php if ($_SESSION['userinfo']['leveluser'] != 'user_karyawan') :  ?>
+        <button id="add-button">
+          <a href="../tambah/tambah-transaksi.php" style="display: block; color: white;">
+            <i class="fa-solid fa-plus"></i>
+          </a>
+        </button>
+      <?php endif; ?>
       <!-- Akhir Add Button -->
     </div>
   </div>

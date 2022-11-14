@@ -1,4 +1,5 @@
   <?php
+  session_start();
   include '../app/koneksi.php';
   include '../app/functions.php';
 
@@ -21,18 +22,21 @@
           <div class="title">
             <h3 class="nama-pelanggan"><?= $row['namalengkap']; ?></h3>
           </div>
+
           <div class="button-menu">
             <i class="fa-solid fa-ellipsis-vertical"></i>
           </div>
           <div class="actions">
-            <a id="delete-btn" data-idpelanggan="<?= $row['idpelanggan']; ?>" data-name="idpelanggan">
-              <i class=" fa-solid fa-trash-can"></i>
-              Delete
-            </a>
-            <a href="../update/updatepelanggan.php?idpelanggan=<?= $row['idpelanggan']  ?>" class="update">
-              <i class=" fa-solid fa-pen-to-square"></i>
-              Update
-            </a>
+            <?php if ($_SESSION['userinfo']['leveluser'] != 'user_karyawan') :  ?>
+              <a id="delete-btn" data-idpelanggan="<?= $row['idpelanggan']; ?>" data-name="idpelanggan">
+                <i class=" fa-solid fa-trash-can"></i>
+                Delete
+              </a>
+              <a href="../update/updatepelanggan.php?idpelanggan=<?= $row['idpelanggan']  ?>" class="update">
+                <i class=" fa-solid fa-pen-to-square"></i>
+                Update
+              </a>
+            <?php endif; ?>
             <a href="" class="foto-resep" data-fotoresep="<?= $row['buktifotoresep'] ?>">
               <i class="fa-solid fa-image"></i>
               Foto Resep

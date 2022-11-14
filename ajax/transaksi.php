@@ -1,4 +1,5 @@
   <?php
+  session_start();
   include '../app/koneksi.php';
   include '../app/functions.php';
 
@@ -38,15 +39,13 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
           </div>
           <div class="actions">
-            <a id="delete-btn" data-name="idtransaksi" data-id_transaksi="<?= $id_transaksi ?>">
-              <i class="fa-solid fa-trash-can"></i>
-              Delete
-            </a>
-            <a href="">
-              <i class=" fa-solid fa-pen-to-square"></i>
-              Update
-            </a>
-            <a class="detail" data-tgl_transaksi="<?= $tgl_transaksi ?>" data-kategori_pelanggan="<?= $kategori_pelanggan ?>" data-idkaryawan="<?= $id_karyawan ?>" data-idpelanggan="<?= $id_pelanggan ?>" data-idtransaksi="<?= $id_transaksi ?>" data-totalbayar="<?= $total_bayar ?>" data-bayar="<?= $bayar ?>" data-kembali="<?= $kembali ?>">
+            <?php if ($_SESSION['userinfo']['leveluser'] != 'user_karyawan') :  ?>
+              <a id="delete-btn" data-name="idtransaksi" data-id_transaksi="<?= $id_transaksi ?>">
+                <i class="fa-solid fa-trash-can"></i>
+                Delete
+              </a>
+            <?php endif; ?>
+            <a class="detail" href="../tambah/tambah-detail-transaksi.php?idtransaksi=<?= $id_transaksi ?>">
               <i class="fa-solid fa-info"></i>
               Detail
             </a>

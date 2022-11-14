@@ -96,18 +96,21 @@ if (isset($_GET['idpelanggan'])) {
                 <div class="title">
                   <h3 class="nama"><?= $row['namalengkap']; ?></h3>
                 </div>
+
                 <div class="button-menu">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
                 <div class="actions">
-                  <a id="delete-btn" data-idpelanggan="<?= $row['idpelanggan']; ?>" data-name="idpelanggan">
-                    <i class=" fa-solid fa-trash-can"></i>
-                    Delete
-                  </a>
-                  <a href="../update/updatepelanggan.php?idpelanggan=<?= $row['idpelanggan']  ?>" class="update">
-                    <i class=" fa-solid fa-pen-to-square"></i>
-                    Update
-                  </a>
+                  <?php if ($_SESSION['userinfo']['leveluser'] != 'user_karyawan') :  ?>
+                    <a id="delete-btn" data-idpelanggan="<?= $row['idpelanggan']; ?>" data-name="idpelanggan">
+                      <i class=" fa-solid fa-trash-can"></i>
+                      Delete
+                    </a>
+                    <a href="../update/updatepelanggan.php?idpelanggan=<?= $row['idpelanggan']  ?>" class="update">
+                      <i class=" fa-solid fa-pen-to-square"></i>
+                      Update
+                    </a>
+                  <?php endif; ?>
                   <a class="foto-resep" data-fotoresep="<?= $row['buktifotoresep'] ?>">
                     <i class="fa-solid fa-image"></i>
                     Foto Resep
@@ -148,9 +151,11 @@ if (isset($_GET['idpelanggan'])) {
 
 
       <!-- Awal Add button -->
-      <button id="add-button">
-        <i class="fa-solid fa-plus"></i>
-      </button>
+      <?php if ($_SESSION['userinfo']['leveluser'] != 'user_karyawan') :  ?>
+        <button id="add-button">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      <?php endif; ?>
       <!-- Akhir Add Button -->
     </div>
   </div>
